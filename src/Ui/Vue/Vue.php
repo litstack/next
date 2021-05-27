@@ -1,6 +1,6 @@
 <?php
 
-namespace Ignite\Vue;
+namespace Ignite\Ui\Vue;
 
 use Closure;
 

@@ -92,7 +92,7 @@ abstract class Form
      */
     public function render(Route $route)
     {
-        return (new Component('lit-form'))
+        return component('lit-form')
             ->bind([
                 'route' => Vue::render($route),
             ]);

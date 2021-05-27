@@ -2,20 +2,12 @@
 
 namespace Ignite\Http;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 abstract class ApiResource extends JsonResource
 {
-    /**
-     * Get the query builder instance.
-     *
-     * @return Builder
-     */
-    abstract public static function query(): Builder;
-
     /**
      * Get index items.
      *

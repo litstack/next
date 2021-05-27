@@ -2,7 +2,8 @@
 
 namespace Ignite;
 
-use Ignite\Vue\Vue;
+use Ignite\Ui\UiServiceProvider;
+use Ignite\Ui\Vue\Vue;
 use Illuminate\Routing\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,6 +16,7 @@ class IgniteServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(UiServiceProvider::class);
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'ignite');
 
         $this->app->singleton('ignite.vue', function () {
