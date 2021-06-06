@@ -1,5 +1,11 @@
-<div id="app">
-    <{{ $component->name }} 
-        v-bind="{!! htmlspecialchars(json_encode($component->getProps(), JSON_PRETTY_PRINT), ENT_QUOTES, 'UTF-8') !!}"
-    ></{{ $component->name }}>
-</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <script src="/admin/js/app.js" defer></script>
+  </head>
+  <body>
+    @inertia
+  </body>
+</html>

@@ -2,212 +2,48 @@
 
 namespace Ignite\Ui\Page;
 
-use Ignite\Support\Vue;
-use Ignite\Table\Table;
-use Ignite\Vue\Component;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Routing\Route;
-use Illuminate\View\View;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Ignite\Form\Form;
+use Illuminate\Contracts\Support\Responsable;
+use Inertia\Inertia;
 
-abstract class Page implements Renderable
+class Page implements Responsable
 {
-    /**
-     * Vue components.
-     *
-     * @var array
-     */
+    protected $data = [];
+
     protected $components = [];
 
     /**
-     * The resource route.
+     * Create an HTTP response that represents the object.
      *
-     * @var array
+     * @param  \Illuminate\Http\Request                   $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected $resource;
+    public function toResponse($request)
+    {
+        return $this->render()->toResponse($request);
+    }
 
-    protected $view;
-
-    abstract public function mount($component);
-
-    /**
-     * Get the evaluated contents of the object.
-     *
-     * @return string
-     */
     public function render()
     {
-        if (request()->wantsJson()) {
-            return $this->toJson();
-        }
+        Inertia::setRootView('ignite::app');
 
-        return view($this->view, [
-            'page' => view(
-                $this->getViewName(),
-                $this->getViewData()
-            )->render(),
-        ]);
+        return Inertia::render('BasePage', array_merge(
+            $this->data,
+            ['components' => $this->components]
+        ));
     }
 
-    public function view($name)
+    public function with($attribute, $data = null)
     {
-        $this->view = $name;
+        $this->data[$attribute] = $data;
 
         return $this;
     }
 
-    /**
-     * Convert the object to its Array representation.
-     *
-     * @param  int   $options
-     * @return array
-     */
-    public function toArray()
+    public function form(Form $form, $route, $create = false)
     {
-        return [
-            'resource'   => $this->resource,
-            'components' => collect($this->components)->map(fn ($component) => $component->toArray()),
-            'title'      => $this->title,
-        ];
-    }
-
-    public function title($title)
-    {
-        $this->title = $title;
+        $this->components[] = $form->render($route, $create);
 
         return $this;
-    }
-
-    /**
-     * Convert the object to its JSON representation.
-     *
-     * @param  int    $options
-     * @return string
-     */
-    public function toJson($options = 0)
-    {
-        return json_encode($this->toArray(), $options);
-    }
-
-    /**
-     * Add form.
-     *
-     * @param  string $form
-     * @param  string $route
-     * @return $this
-     */
-    public function form($form, $route)
-    {
-        $this->components[] = (new $form)->render(
-            $route instanceof Route ? $route : $this->getRouteByName($route)
-        );
-
-        return $this;
-    }
-
-    public function component(Component $component)
-    {
-        $this->components[] = $component;
-
-        return $this;
-    }
-
-    /**
-     * Add index table to page.
-     *
-     * @param  Table|string $table
-     * @param  string       $route
-     * @return Table
-     */
-    public function table($table, $route = null)
-    {
-        if (! $table instanceof $table) {
-            $table = new $table;
-        }
-
-        if (! is_null($route)) {
-            $table->from($route);
-        }
-
-        $this->components[] = $table->getComponent();
-
-        return $table;
-    }
-
-    /**
-     * Get route by name.
-     *
-     * @param  string $name
-     * @return Route
-     *
-     * @throws \Symfony\Component\Routing\Exception\RouteNotFoundException
-     */
-    protected function getRouteByName($name)
-    {
-        $routes = app()->instance(
-            'routes', app('router')->getRoutes()
-        );
-
-        if ($route = $routes->getByName($name)) {
-            return $route;
-        }
-
-        throw new RouteNotFoundException("Route [{$name}] not defined.");
-    }
-
-    /**
-     * Set resource.
-     *
-     * @param  Route|string $resource
-     * @param  array        $parameters
-     * @param  bool         $absolute
-     * @return $this
-     */
-    public function resource($route, array $parameters = [], $absolute = true)
-    {
-        $route = $route instanceof Route
-            ? $route
-            : $this->getRouteByName($route, $parameters, $absolute);
-
-        $this->resource = Vue::render($route);
-        $this->resource['route'] = url()->toRoute($route, $parameters, $absolute);
-
-        return $this;
-    }
-
-    /**
-     * Get view data.
-     *
-     * @return array
-     */
-    public function getViewData()
-    {
-        $this->mount($component = component($this->layout));
-
-        $component->prop('page', $this->toArray());
-
-        return [
-            'component' => $component,
-        ];
-    }
-
-    /**
-     * Get view name.
-     *
-     * @return string
-     */
-    public function getViewName()
-    {
-        return 'ignite::app';
-    }
-
-    /**
-     * Render the page.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->render();
     }
 }

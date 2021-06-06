@@ -2,14 +2,15 @@
 
 namespace Ignite\Form;
 
-use Ignite\Support\Vue;
-use Ignite\Vue\Component;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 
 abstract class Form
 {
+    protected $schema;
+
+    protected $model;
+
     /**
      * Build the form schema.
      *
@@ -21,12 +22,12 @@ abstract class Form
     /**
      * Create new Form instance.
      *
-     * @param  Route $route
+     * @param  Model $model
      * @return void
      */
-    public function __construct()
+    public function __construct($model)
     {
-        //
+        $this->model = $model;
     }
 
     /**
@@ -36,11 +37,13 @@ abstract class Form
      * @param  Model   $model
      * @return void
      */
-    public function update(Request $request, Model $model)
+    public function update(Request $request)
     {
-        $request->validate($this->rules());
+        // $request->validate($this->rules());
 
-        return $model->fill($request->all())->save();
+        $this->model->fill($request->all())->save();
+
+        return back(303);
     }
 
     /**
@@ -84,17 +87,12 @@ abstract class Form
         return $this->schema;
     }
 
-    /**
-     * Render the form.
-     *
-     * @param  Route     $route
-     * @return Component
-     */
-    public function render(Route $route)
+    public function render($route, $store = false)
     {
-        return component('lit-form')
-            ->bind([
-                'route' => Vue::render($route),
-            ]);
+        return $this->getSchema()
+            ->getComponent()
+            ->prop('model', $this->model)
+            ->prop('route', $route)
+            ->prop('store', $store);
     }
 }
