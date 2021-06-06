@@ -1,0 +1,26 @@
+{
+	"name": "litstack/future",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Lennart Carstens-Behrens",
+			"email": "lennart.carbe@gmail.com"
+		}
+	],
+	"autoload": {
+		"files": [
+			"src/Support/helpers.php"
+		],
+		"psr-4": {
+			"Ignite\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	},
+	"require": {},
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}
