@@ -57,13 +57,14 @@ class Component implements VueComponent, Arrayable, Jsonable
     /**
      * Add component style.
      *
-     * @param  array|string $property
-     * @param  mixed        $value
+     * @param array|string $property
+     * @param mixed        $value
+     *
      * @return $this
      */
     public function style($property, $value = null)
     {
-        if (is_null($value) && ! is_array($property)) {
+        if (is_null($value) && !is_array($property)) {
             throw new InvalidArgumentException(sprintf('Missing value for property style [?].', $property));
         }
 
@@ -79,7 +80,8 @@ class Component implements VueComponent, Arrayable, Jsonable
     /**
      * Set component id.
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return $this
      */
     public function id($id)
@@ -124,7 +126,8 @@ class Component implements VueComponent, Arrayable, Jsonable
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  int    $options
+     * @param int $options
+     *
      * @return string
      */
     public function toJson($options = 0)

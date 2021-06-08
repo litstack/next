@@ -14,7 +14,8 @@ abstract class Form
     /**
      * Build the form schema.
      *
-     * @param  Schema $form
+     * @param Schema $form
+     *
      * @return void
      */
     abstract public function schema(Schema $form);
@@ -22,7 +23,8 @@ abstract class Form
     /**
      * Create new Form instance.
      *
-     * @param  Model $model
+     * @param Model $model
+     *
      * @return void
      */
     public function __construct($model)
@@ -33,8 +35,9 @@ abstract class Form
     /**
      * Update the given model.
      *
-     * @param  Request $request
-     * @param  Model   $model
+     * @param Request $request
+     * @param Model   $model
+     *
      * @return void
      */
     public function update(Request $request)
@@ -49,7 +52,8 @@ abstract class Form
     /**
      * Store a new model.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return void
      */
     public function store(Request $request)

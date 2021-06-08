@@ -3,7 +3,6 @@
 namespace Ignite\Form\Fields;
 
 use Ignite\Contracts\Form\Field;
-use Ignite\Ui\Vue\Component;
 
 class Input implements Field
 {
