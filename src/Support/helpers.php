@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('component')) {
+if (! function_exists('component')) {
     /**
      * Create a component.
      *

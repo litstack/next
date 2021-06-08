@@ -65,7 +65,7 @@ class Component implements ReactComponent, Arrayable, Jsonable, Renderable
      */
     public function style($property, $value = null)
     {
-        if (is_null($value) && !is_array($property)) {
+        if (is_null($value) && ! is_array($property)) {
             throw new InvalidArgumentException(sprintf('Missing value for property style [?].', $property));
         }
 
