@@ -13,8 +13,6 @@ class UiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('ui', function () {
-            return new Factory(config('lit.default_app'), config('lit.apps'));
-        });
+        //
     }
 }
