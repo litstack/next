@@ -50,7 +50,7 @@ class RouteBinder
     {
         $name = last(array_keys($route->parameters()));
 
-        if (!$this->isModelParameter($name, $this->getModelClass())) {
+        if (! $this->isModelParameter($name, $this->getModelClass())) {
             return;
         }
 

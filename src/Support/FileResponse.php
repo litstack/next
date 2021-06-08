@@ -66,13 +66,13 @@ class FileResponse implements Responsable
      */
     public function getMimeType()
     {
-        if (!File::exists($this->path)) {
+        if (! File::exists($this->path)) {
             return;
         }
 
         $info = pathinfo($this->path);
 
-        if (!array_key_exists('extension', $info)) {
+        if (! array_key_exists('extension', $info)) {
             return 'text/plain';
         }
 
@@ -101,7 +101,7 @@ class FileResponse implements Responsable
      */
     public function toResponse($request)
     {
-        if (!File::exists($this->path)) {
+        if (! File::exists($this->path)) {
             throw new NotFoundHttpException();
         }
 

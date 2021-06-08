@@ -36,7 +36,7 @@ class SubstituteBindings extends BaseSubstituteBindings
     {
         $controller = $request->route()->getController();
 
-        if (!$controller) {
+        if (! $controller) {
             return;
         }
 

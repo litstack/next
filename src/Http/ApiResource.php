@@ -23,8 +23,7 @@ abstract class ApiResource extends JsonResource
         array $filters = [],
         array $searchKeys = [],
         $index = Index::class
-    ): ResourceCollection
-    {
+    ): ResourceCollection {
         $items = (new $index($filters, $searchKeys))
             ->items($request, static::query());
 
