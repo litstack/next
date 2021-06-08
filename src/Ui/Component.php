@@ -97,6 +97,16 @@ class Component implements ComponentContract, Arrayable, Jsonable
     }
 
     /**
+     * Get component name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array

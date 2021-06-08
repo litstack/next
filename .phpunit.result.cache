@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Ui\\ComponentTest::testSetName":4,"Tests\\Ui\\ComponentTest::testBind":4},"times":{"Tests\\Ui\\ComponentTest::testSetName":0.004,"Tests\\Ui\\ComponentTest::testProp":0,"Tests\\Ui\\ComponentTest::testBind":0,"Tests\\Ui\\ComponentTest::testToArray":0,"Tests\\Ui\\ComponentTest::testToJson":0}}
