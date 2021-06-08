@@ -10,7 +10,7 @@ class Schema implements Arrayable
 
     public function col()
     {
-        return $this->columns[] = new Column;
+        return $this->columns[] = new Column();
     }
 
     /**

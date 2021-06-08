@@ -11,8 +11,9 @@ class SubstituteBindings extends BaseSubstituteBindings
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -27,14 +28,15 @@ class SubstituteBindings extends BaseSubstituteBindings
     /**
      * Get route binder.
      *
-     * @param  \Illuminate\Http\Request       $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Ignite\Route\RouteBinder|void
      */
     protected function getRouteBinder($request)
     {
         $controller = $request->route()->getController();
 
-        if (! $controller) {
+        if (!$controller) {
             return;
         }
 

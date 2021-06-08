@@ -1,11 +1,12 @@
 <?php
 
-if (! function_exists('component')) {
+if (!function_exists('component')) {
     /**
      * Create a component.
      *
-     * @param  string                               $name
-     * @param  string|null                          $app
+     * @param string      $name
+     * @param string|null $app
+     *
      * @return \Ignite\Contracts\Ui\Component|mixed
      */
     function component($name, $app = null)

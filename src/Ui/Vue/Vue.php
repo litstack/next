@@ -23,7 +23,8 @@ class Vue
     /**
      * Get renderer for the given object.
      *
-     * @param  mixed        $object
+     * @param mixed $object
+     *
      * @return Closure|void
      */
     public function getRendererFor(mixed $object)
