@@ -5,5 +5,11 @@
         "noImplicitAny": false,
         "sourceMap": false
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx", "resources/js/**/*.vue"]
+    "include": [
+        "resources/js/**/*.ts", 
+        "resources/js/**/*.d.ts", 
+        "resources/js/**/*.tsx", 
+        "resources/js/**/*.vue", 
+        "resources/js/**/*.js"
+    ]
 }

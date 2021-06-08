@@ -1,0 +1,16 @@
+{
+    "name": "@litstackjs/theme-vue3",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@litstackjs/litstack-vue3": "file:../litstack-vue3",
+        "@vue/compiler-sfc": "^3.1.0",
+        "vue": "^3.0.0"
+    }
+}

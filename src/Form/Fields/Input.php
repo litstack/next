@@ -11,6 +11,8 @@ class Input implements Field
 
     protected $componentName = 'lit-input';
 
+    protected $inputComponentName = 'ui-input';
+
     public function __construct($attribute)
     {
         $this->attribute = $attribute;
@@ -19,7 +21,8 @@ class Input implements Field
     public function getComponent()
     {
         return component($this->componentName)
-            ->prop('attribute', $this->attribute);
+            ->prop('attribute', $this->attribute)
+            ->prop('inputComponentName', $this->inputComponentName);
     }
 
     public function attributes()
