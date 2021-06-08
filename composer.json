@@ -20,9 +20,14 @@
 			"Tests\\": "tests/"
 		}
 	},
-	"require": {
-		"php": "^8.0",
-	},
 	"minimum-stability": "dev",
-	"prefer-stable": true
+	"prefer-stable": true,
+	"require-dev": {
+		"php": "^8.0",
+		"phpunit/phpunit": "^9.5"
+	},
+	"require": {
+		"illuminate/support": "^8.46",
+		"illuminate/contracts": "^8.46"
+	}
 }
