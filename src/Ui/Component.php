@@ -25,7 +25,8 @@ class Component implements ComponentContract, Arrayable, Jsonable
     /**
      * Create new Component instance.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return void
      */
     public function __construct($name)
@@ -49,7 +50,8 @@ class Component implements ComponentContract, Arrayable, Jsonable
     /**
      * Bind multiple component props.
      *
-     * @param  array $props
+     * @param array $props
+     *
      * @return $this
      */
     public function bind($props)
@@ -64,8 +66,9 @@ class Component implements ComponentContract, Arrayable, Jsonable
     /**
      * Bind prop to the component.
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @param string $name
+     * @param mixed  $value
+     *
      * @return $this
      */
     public function prop($name, $value)
@@ -88,7 +91,8 @@ class Component implements ComponentContract, Arrayable, Jsonable
     /**
      * Get component prop by name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return mixed
      */
     public function getProp($name)
@@ -112,7 +116,8 @@ class Component implements ComponentContract, Arrayable, Jsonable
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  int    $options
+     * @param int $options
+     *
      * @return string
      */
     public function toJson($options = 0)

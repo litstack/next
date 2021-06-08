@@ -41,15 +41,16 @@ class RouteBinder
     /**
      * Bind to router.
      *
-     * @param  Router $router
-     * @param  Route  $route
+     * @param Router $router
+     * @param Route  $route
+     *
      * @return void
      */
     public function bindTo(Router $router, Route $route)
     {
         $name = last(array_keys($route->parameters()));
 
-        if (! $this->isModelParameter($name, $this->getModelClass())) {
+        if (!$this->isModelParameter($name, $this->getModelClass())) {
             return;
         }
 
@@ -59,16 +60,18 @@ class RouteBinder
     /**
      * Resolve binding.
      *
-     * @param  string                                $value
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @return mixed
+     * @param string                                $value
+     * @param \Illuminate\Database\Eloquent\Builder $query
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return mixed
      */
     protected function resolveBinding($value, $query)
     {
         return $query->where(
-            $query->getModel()->getRouteKeyName(), $value
+            $query->getModel()->getRouteKeyName(),
+            $value
         )->firstOrFail();
     }
 
