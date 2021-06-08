@@ -24,20 +24,27 @@ class Page implements PageContract, Responsable
     protected $components = [];
 
     /**
-     * The inertia page name.
+     * The inertia component name.
      *
      * @var string
      */
-    protected $inertiaPage = 'BasePage';
+    protected $inertiaComponent = 'BasePage';
+
+    /**
+     * View name.
+     *
+     * @var string
+     */
+    protected $view = 'ignite::app';
 
     /**
      * Get the inertia page name.
      *
      * @return string
      */
-    protected function getInertiaPage()
+    public function getInertiaComponent()
     {
-        return $this->inertiaPage;
+        return $this->inertiaComponent;
     }
 
     /**
@@ -70,6 +77,16 @@ class Page implements PageContract, Responsable
     }
 
     /**
+     * Get view name.
+     *
+     * @return string
+     */
+    public function getViewName()
+    {
+        return $this->view;
+    }
+
+    /**
      * Create an HTTP response that represents the object.
      *
      * @param  \Illuminate\Http\Request                   $request
@@ -87,9 +104,9 @@ class Page implements PageContract, Responsable
      */
     public function render()
     {
-        Inertia::setRootView('ignite::app');
+        Inertia::setRootView($this->getViewName());
 
-        return Inertia::render($this->getInertiaPage(), array_merge(
+        return Inertia::render($this->getInertiaComponent(), array_merge(
             $this->data,
             ['components' => $this->components]
         ));

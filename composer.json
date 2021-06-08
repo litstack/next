@@ -28,6 +28,7 @@
 	},
 	"require": {
 		"illuminate/support": "^8.46",
-		"illuminate/contracts": "^8.46"
+		"illuminate/contracts": "^8.46",
+		"inertiajs/inertia-laravel": "^0.4"
 	}
 }
