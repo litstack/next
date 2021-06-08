@@ -6,8 +6,18 @@ use Ignite\Contracts\Form\Field;
 
 class Schema
 {
+    /**
+     * Form fields.
+     *
+     * @var array
+     */
     protected $fields = [];
 
+    /**
+     * A list of ui components that represent the form.
+     *
+     * @var array
+     */
     protected $components = [];
 
     public function fields(array $fields)

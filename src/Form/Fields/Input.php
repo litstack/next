@@ -2,30 +2,34 @@
 
 namespace Ignite\Form\Fields;
 
-use Ignite\Contracts\Form\Field;
+use Ignite\Form\Field;
 
-class Input implements Field
+class Input extends Field
 {
-    protected $attribute;
-
+    /**
+     * The ui component name that represents the field.
+     *
+     * @var string
+     */
     protected $componentName = 'lit-input';
 
+    /**
+     * The input component name.
+     *
+     * @var string
+     */
     protected $inputComponentName = 'ui-input';
 
-    public function __construct($attribute)
+    /**
+     * Mount the field.
+     *
+     * @param  \Ignite\Contracts\Ui\Component $component
+     * @return void
+     */
+    public function mount($component)
     {
-        $this->attribute = $attribute;
-    }
-
-    public function getComponent()
-    {
-        return component($this->componentName)
-            ->prop('attribute', $this->attribute)
-            ->prop('inputComponentName', $this->inputComponentName);
-    }
-
-    public function attributes()
-    {
-        return [$this->attribute];
+        $component->bind([
+            'inputComponentName' => $this->inputComponentName,
+        ]);
     }
 }

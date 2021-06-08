@@ -7,14 +7,41 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BelongsToSelect extends Field
 {
+    /**
+     * The ui component name that represents the field.
+     *
+     * @var string
+     */
     protected $componentName = 'lit-relation-belongs-to-select';
 
-    protected BelongsTo $relation;
+    /**
+     * The relationship instance.
+     *
+     * @var \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    protected $relation;
 
+    /**
+     * The route to fetch the items that can be attached.
+     *
+     * @var string
+     */
     protected $indexRoute;
 
+    /**
+     * The value that is displayed in the select.
+     *
+     * @var string
+     */
     protected $value;
 
+    /**
+     * Create new BelongsToSelect instance.
+     *
+     * @param  BelongsTo $relation
+     * @param  string    $indexRoute
+     * @return void
+     */
     public function __construct(BelongsTo $relation, $indexRoute)
     {
         $this->relation = $relation;
@@ -23,6 +50,12 @@ class BelongsToSelect extends Field
         parent::__construct($relation->getForeignKeyName());
     }
 
+    /**
+     * Mount the field.
+     *
+     * @param  \Ignite\Contracts\Ui\Component $component
+     * @return void
+     */
     public function mount($component)
     {
         $component
@@ -31,6 +64,12 @@ class BelongsToSelect extends Field
             ->prop('value', $this->value);
     }
 
+    /**
+     * Set the value that is being displayed in the select field.
+     *
+     * @param  string $value
+     * @return $this
+     */
     public function value($value)
     {
         $this->value = $value;

@@ -2,6 +2,5 @@
 /node_modules/
 *.DS_Store
 *.LICENSE.txt
-package-lock.json
 composer.lock
 .phpunit.result.cache

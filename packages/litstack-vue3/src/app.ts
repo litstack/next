@@ -1,4 +1,4 @@
-import Form from './modules/form/Form';
+import Form from './form/Form';
 
 const plugin = {
     install(app) {

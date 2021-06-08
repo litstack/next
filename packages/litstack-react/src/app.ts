@@ -1,5 +1,5 @@
-import Form from './modules/form/Form';
-import Input from './modules/form/Fields/Input';
+import Form from './form/Form';
+import Input from './form/Fields/Input';
 
 const plugin = {
     install(addComponent) {

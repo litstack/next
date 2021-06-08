@@ -6,6 +6,7 @@ use Ignite\Contracts\Form\Form;
 use Ignite\Contracts\Ui\Page as PageContract;
 use Illuminate\Contracts\Support\Responsable;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class Page implements PageContract, Responsable
 {
@@ -36,6 +37,17 @@ class Page implements PageContract, Responsable
      * @var string
      */
     protected $view = 'ignite::app';
+
+    /**
+     * Mount the page.
+     *
+     * @param Response $response
+     * @return void
+     */
+    public function mount(Response $inertia)
+    {
+        //
+    }
 
     /**
      * Get the inertia page name.
@@ -106,7 +118,7 @@ class Page implements PageContract, Responsable
     {
         Inertia::setRootView($this->getViewName());
 
-        return Inertia::render($this->getInertiaComponent(), array_merge(
+        $response Inertia::render($this->getInertiaComponent(), array_merge(
             $this->data,
             ['components' => $this->components]
         ));
