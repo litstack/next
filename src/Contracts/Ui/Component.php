@@ -20,4 +20,12 @@ interface Component
      * @return $this
      */
     public function bind($props);
+
+    /**
+     * Set component name.
+     *
+     * @param  string $name
+     * @return $this
+     */
+    public function setName($name);
 }

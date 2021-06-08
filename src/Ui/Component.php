@@ -34,6 +34,19 @@ class Component implements ComponentContract, Arrayable, Jsonable
     }
 
     /**
+     * Set component name.
+     *
+     * @param  string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
      * Bind multiple component props.
      *
      * @param  array $props
