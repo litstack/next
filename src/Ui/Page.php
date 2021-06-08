@@ -41,7 +41,8 @@ class Page implements PageContract, Responsable
     /**
      * Mount the page.
      *
-     * @param Response $response
+     * @param  Response $response
+     * @param  Response $inertia
      * @return void
      */
     public function mount(Response $inertia)
@@ -118,9 +119,13 @@ class Page implements PageContract, Responsable
     {
         Inertia::setRootView($this->getViewName());
 
-        $response Inertia::render($this->getInertiaComponent(), array_merge(
+        $response = Inertia::render($this->getInertiaComponent(), array_merge(
             $this->data,
             ['components' => $this->components]
         ));
+
+        $this->mount($response);
+
+        return $response;
     }
 }
