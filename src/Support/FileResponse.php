@@ -34,9 +34,8 @@ class FileResponse implements Responsable
     /**
      * Create new FileResponse instance.
      *
-     * @param string          $path
-     * @param CarbonInterface $expired
-     *
+     * @param  string          $path
+     * @param  CarbonInterface $expired
      * @return void
      */
     public function __construct($path, CarbonInterface $expires = null)
@@ -54,8 +53,7 @@ class FileResponse implements Responsable
     {
         return $this->modified
             ?: $this->modified = Carbon::createFromTimestamp(
-                filemtime($this->path),
-                config('app.timezone')
+                filemtime($this->path), config('app.timezone')
             );
     }
 
@@ -66,13 +64,13 @@ class FileResponse implements Responsable
      */
     public function getMimeType()
     {
-        if (!File::exists($this->path)) {
+        if (! File::exists($this->path)) {
             return;
         }
 
         $info = pathinfo($this->path);
 
-        if (!array_key_exists('extension', $info)) {
+        if (! array_key_exists('extension', $info)) {
             return 'text/plain';
         }
 
@@ -95,13 +93,12 @@ class FileResponse implements Responsable
     /**
      * Create an HTTP response that represents the object.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request                   $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function toResponse($request)
     {
-        if (!File::exists($this->path)) {
+        if (! File::exists($this->path)) {
             throw new NotFoundHttpException();
         }
 

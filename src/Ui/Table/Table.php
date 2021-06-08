@@ -2,6 +2,8 @@
 
 namespace Ignite\Ui\Table;
 
+use Ignite\Ui\Vue\Component;
+
 abstract class Table
 {
     protected ?Schema $schema = null;
@@ -15,9 +17,7 @@ abstract class Table
     public function __construct()
     {
         $this->component = component($this->getComponentName())
-            ->prop(
-                'items-component',
-                component('ui-table')
+            ->prop('items-component', component('ui-table')
             ->prop('schema', $this->getSchema()->toArray())
             ->toArray()
             )

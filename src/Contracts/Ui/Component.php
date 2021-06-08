@@ -7,9 +7,8 @@ interface Component
     /**
      * Add a prop to the component.
      *
-     * @param string $name
-     * @param mixed  $value
-     *
+     * @param  string $name
+     * @param  mixed  $value
      * @return $this
      */
     public function prop($name, $value);
@@ -17,8 +16,7 @@ interface Component
     /**
      * Bind multiple props.
      *
-     * @param array $props
-     *
+     * @param  array $props
      * @return $this
      */
     public function bind($props);
