@@ -89,6 +89,13 @@ class Page implements PageContract, Responsable
         return $this;
     }
 
+    public function table($table, $route)
+    {
+        $this->components[] = $table->render($route);
+
+        return $this;
+    }
+
     /**
      * Get view name.
      *

@@ -1,5 +1,5 @@
 <template>
-	<base-input v-bind="$attrs" style="background: red" />
+	<base-input v-bind="$attrs" />
 </template>
 
 <script>

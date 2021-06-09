@@ -1,8 +1,5 @@
-import { defineComponent } from "vue";
+import { defineComponent, h } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-
-import LitInput from "./fields/Input";
-import LitRelationBelongsToSelect from "./fields/RelationBelongsToSelect";
 
 const template = `
     <form @submit.prevent="submit()">
@@ -16,9 +13,8 @@ const template = `
     </form>
 `;
 
-export default defineComponent({
+let BaseForm = defineComponent({
     template,
-    name: "LitForm",
     props: {
         schema: {
             type: Array,
@@ -41,10 +37,6 @@ export default defineComponent({
             required: true,
         },
     },
-    components: {
-        LitInput,
-        LitRelationBelongsToSelect,
-    },
     setup(props) {
         let attributes = Object.keys(props.model)
             .filter((key) => props.attributes.includes(key))
@@ -60,5 +52,11 @@ export default defineComponent({
         }
 
         return { form, submit };
+    },
+});
+
+export default defineComponent({
+    components: {
+        BaseForm,
     },
 });

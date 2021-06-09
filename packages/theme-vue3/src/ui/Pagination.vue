@@ -1,51 +1,32 @@
 <template>
-	<ul class="flex">
-		<li
-			:class="{
-				'mx-1': true,
-				'px-3': true,
-				'py-2': true,
-				'bg-gray-200': true,
-				'text-gray-700': true,
-				'hover:bg-gray-700': true,
-				'hover:text-gray-200': true,
-				'rounded-lg': true,
-			}"
-		>
-			<a
-				class="flex items-center font-bold"
-				href="#"
-				@click.prevent="$emit('prev')"
-			>
-				<span class="mx-1">previous</span>
-			</a>
+	<ul>
+		<li>
+			<button @click="setPage(1)">
+				<span>first</span>
+			</button>
 		</li>
-		<li
-			:class="{
-				'mx-1': true,
-				'px-3': true,
-				'py-2': true,
-				'bg-gray-200': true,
-				'text-gray-700': true,
-				'hover:bg-gray-700': true,
-				'hover:text-gray-200': true,
-				'rounded-lg': true,
-			}"
-		>
-			<a
-				class="flex items-center font-bold"
-				href="#"
-				@click.prevent="$emit('next')"
-			>
-				<span class="mx-1">Next</span>
-			</a>
+		<li>
+			<button @click="prevPage()" v-bind:disabled="!hasPrevPage.value">
+				<span>previous</span>
+			</button>
 		</li>
+		<li>
+			<button @click="nextPage()" :disabled="!hasNextPage.value">
+				<span>Next</span>
+			</button>
+		</li>
+		<li>
+			<button @click="lastPage()">
+				<span>last</span>
+			</button>
+		</li>
+		<li>Page: {{ currentPage.value }}</li>
+		<li>Total Pages:</li>
 	</ul>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-export default defineComponent({
-	name: 'UiPagination',
-});
+import { Pagination } from '@litstackjs/litstack-vue3';
+
+export default Pagination;
 </script>

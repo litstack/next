@@ -1,11 +1,11 @@
-import Form from './form/Form';
+
 
 const plugin = {
     install(app) {
         //Object.defineProperty(app.config.globalProperties, '$inertia', { get: () => Inertia })
     
         // app.mixin(remember)
-        app.component('LitForm', Form);
+        // app.component('LitForm', Form);
     }
 }
 

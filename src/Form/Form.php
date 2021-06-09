@@ -23,6 +23,13 @@ abstract class Form implements FormContract
     protected $model;
 
     /**
+     * Functional wrapper component name.
+     *
+     * @var string
+     */
+    protected $componentName = 'ui-form';
+
+    /**
      * Build the form schema.
      *
      * @param  Schema $form
@@ -99,6 +106,24 @@ abstract class Form implements FormContract
     }
 
     /**
+     * Get the form component.
+     *
+     * @return \Ignite\Contracts\Ui\Component
+     */
+    public function getComponent()
+    {
+        $this->getSchema()->applyTo(
+            $component = component($this->componentName)
+        );
+
+        $component->bind([
+            'model' => $this->model,
+        ]);
+
+        return $component;
+    }
+
+    /**
      * Render the form.
      *
      * @param  string $route
@@ -107,10 +132,9 @@ abstract class Form implements FormContract
      */
     public function render($route, $store = false)
     {
-        return $this->getSchema()
-            ->getComponent()
-            ->prop('model', $this->model)
-            ->prop('route', $route)
-            ->prop('store', $store);
+        return $this->getComponent()->bind([
+            'route' => $route,
+            'store' => $store,
+        ]);
     }
 }

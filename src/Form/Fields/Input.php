@@ -11,7 +11,7 @@ class Input extends Field
      *
      * @var string
      */
-    protected $componentName = 'lit-input';
+    protected $componentName = 'ui-form-input';
 
     /**
      * The input component name.
@@ -29,7 +29,7 @@ class Input extends Field
     public function mount($component)
     {
         $component->bind([
-            'inputComponentName' => $this->inputComponentName,
+            'inputComponent' => component($this->inputComponentName),
         ]);
     }
 }

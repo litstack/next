@@ -1,22 +1,21 @@
 <template>
-	<table class="min-w-full divide-y divide-gray-200">
-		<thead class="bg-gray-50">
+	<table>
+		<thead>
 			<tr>
-				<table-head-column
-					:item="item"
-					:schema="column"
-					v-for="(column, index) in schema"
-					:key="index"
+				<base-th
+					v-bind="{ ...$attrs, ...column }"
+					v-for="(column, thKey) in schema"
+					:key="`th-${thKey}`"
 				/>
 			</tr>
 		</thead>
-		<tbody class="bg-white divide-y divide-gray-200">
-			<tr v-for="(item, index) in items" :key="index">
-				<table-column
+		<tbody>
+			<tr v-for="(item, trKey) in items.value" :key="`th-${trKey}`">
+				<base-td
+					v-bind="{ ...$attrs, ...column }"
+					v-for="(column, tdKey) in schema"
+					:key="`td-${tdKey}`"
 					:item="item"
-					:schema="column"
-					v-for="(column, index) in schema"
-					:key="index"
 				/>
 			</tr>
 		</tbody>
@@ -24,26 +23,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { Table } from '@litstackjs/litstack-vue3';
 
-import TableColumn from './TableColumn.vue';
-import TableHeadColumn from './TableHeadColumn.vue';
-
-export default defineComponent({
-	name: 'UiTable',
-	components: {
-		TableColumn,
-		TableHeadColumn,
-	},
-	props: {
-		items: {
-			required: true,
-			type: Array,
-		},
-		schema: {
-			type: Array,
-			required: true,
-		},
-	},
-});
+export default Table;
 </script>

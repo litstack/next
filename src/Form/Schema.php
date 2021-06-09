@@ -37,9 +37,9 @@ class Schema
         return $this;
     }
 
-    public function getComponent()
+    public function applyTo($component)
     {
-        return component('lit-form')
+        $component
             ->prop('attributes', collect($this->fields)->map(fn ($field) => $field->attributes())->flatten()->toArray())
             ->prop('schema', collect($this->components)->toArray());
     }

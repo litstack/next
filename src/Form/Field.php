@@ -14,6 +14,13 @@ abstract class Field implements FieldContract
     protected $attribute;
 
     /**
+     * The field title.
+     *
+     * @var string
+     */
+    protected $title;
+
+    /**
      * The parent form instance that the field is bound to.
      *
      * @var \Ignite\Contracts\Form\Form|null
@@ -35,6 +42,7 @@ abstract class Field implements FieldContract
     public function __construct($attribute)
     {
         $this->attribute = $attribute;
+        $this->title = ucfirst(str_replace('_', ' ', $attribute));
     }
 
     /**
@@ -46,6 +54,13 @@ abstract class Field implements FieldContract
     public function mount($component)
     {
         //
+    }
+
+    public function title($title)
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -66,8 +81,10 @@ abstract class Field implements FieldContract
      */
     public function getComponent()
     {
-        $component = component($this->componentName)
-            ->prop('attribute', $this->attribute);
+        $component = component($this->componentName, [
+            'attribute' => $this->attribute,
+            'title'     => $this->title,
+        ]);
 
         $this->mount($component);
 
