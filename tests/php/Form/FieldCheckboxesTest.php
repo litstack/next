@@ -15,7 +15,7 @@ class FieldCheckboxesTest extends TestCase
         $this->assertEquals(['bar' => 'Bar'], $field->options);
     }
 
-    public function testComponent()
+    public function testRendering()
     {
         $field = new Checkboxes('foo', ['bar' => 'Bar']);
         $this->assertInstanceOf(Component::class, $component = $field->getComponent());

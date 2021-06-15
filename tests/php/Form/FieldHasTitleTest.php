@@ -3,8 +3,10 @@
 namespace Tests\Ui;
 
 use Ignite\Contracts\Form\Fields\Titleable;
+use Ignite\Contracts\Ui\Component;
 use Ignite\Form\Field;
 use Ignite\Form\Fields\Traits\HasTitle;
+use Illuminate\Testing\AssertableJsonString;
 use PHPUnit\Framework\TestCase;
 
 class FieldHasTitleTest extends TestCase
@@ -29,6 +31,19 @@ class FieldHasTitleTest extends TestCase
         $this->assertTrue($field->hasTitle);
         $this->assertSame($field, $field->hasTitle(false));
         $this->assertFalse($field->hasTitle);
+    }
+
+    public function testRendering()
+    {
+        $field = new FieldThatHasTitle('');
+        $field->title('foo');
+        $this->assertInstanceOf(Component::class, $component = $field->getComponent());
+        $props = new AssertableJsonString($component->getProps());
+        $props->assertFragment([
+            'title'    => 'foo',
+            'hasTitle' => true,
+            'titleTag' => 'h5',
+        ]);
     }
 }
 
