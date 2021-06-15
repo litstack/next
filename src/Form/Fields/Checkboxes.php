@@ -7,6 +7,13 @@ use Ignite\Form\Field;
 class Checkboxes extends Field
 {
     /**
+     * Checkbox options.
+     *
+     * @var array
+     */
+    public $options = [];
+
+    /**
      * The ui component name that represents the field.
      *
      * @var string
@@ -19,13 +26,6 @@ class Checkboxes extends Field
      * @var string
      */
     protected $checkboxComponentName = 'ui-checkbox';
-
-    /**
-     * Checkbox options.
-     *
-     * @var array
-     */
-    protected $options = [];
 
     /**
      * Create new Checkboxes instance.
@@ -51,15 +51,5 @@ class Checkboxes extends Field
             'checkboxComponent' => component($this->checkboxComponentName),
             'options'           => $this->options,
         ]);
-    }
-
-    /**
-     * Get options.
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
     }
 }

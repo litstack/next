@@ -18,7 +18,7 @@ abstract class Field implements FieldContract
      *
      * @var string
      */
-    protected $title;
+    public $title;
 
     /**
      * The parent form instance that the field is bound to.

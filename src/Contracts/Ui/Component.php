@@ -2,7 +2,10 @@
 
 namespace Ignite\Contracts\Ui;
 
-interface Component
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
+interface Component extends Arrayable, Jsonable
 {
     /**
      * Add a prop to the component.
