@@ -16,7 +16,7 @@ class FoundationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->callAfterResolving('router', function (Router $router) {
-            $router->get('admin/js/app.js', fn () => new FileResponse(__DIR__.'/../../dist/vue3/app.js'));
+            $router->get('admin/js/app.js', fn () => new FileResponse(__DIR__.'/../../dist/react/app.js'));
         });
     }
 }

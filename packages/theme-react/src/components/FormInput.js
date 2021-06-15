@@ -1,6 +1,6 @@
 import { FormInput as BaseFormInput } from '@litstackjs/litstack-react';
 
-const Input = function (props) {
+const FormInput = function (props) {
     return (
         <div>
             <h5>{props.title}</h5>
@@ -9,4 +9,4 @@ const Input = function (props) {
     );
 };
 
-export default Input;
+export default FormInput;

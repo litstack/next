@@ -10,6 +10,7 @@ const template = `
             :key="'f-'+index"
             :form="form"
         />
+        <button @click.prevent="submit()">Save</button>
     </form>
 `;
 

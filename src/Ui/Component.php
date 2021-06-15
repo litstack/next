@@ -4,9 +4,8 @@ namespace Ignite\Ui;
 
 use Ignite\Contracts\Ui\Component as ComponentContract;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
 
-class Component implements ComponentContract, Arrayable, Jsonable
+class Component implements ComponentContract
 {
     /**
      * Component props.
@@ -113,10 +112,31 @@ class Component implements ComponentContract, Arrayable, Jsonable
      */
     public function toArray()
     {
-        return [
+        return $this->renderArray([
             'props' => $this->props,
             'name'  => $this->name,
-        ];
+        ]);
+    }
+
+    /**
+     * Render array.
+     *
+     * @param  array $array
+     * @return array
+     */
+    protected function renderArray(array $array): array
+    {
+        return collect($array)->map(function ($value) {
+            if ($value instanceof Arrayable) {
+                return $value->toArray();
+            }
+
+            if (is_array($value)) {
+                return $this->renderArray($value);
+            }
+
+            return $value;
+        })->toArray();
     }
 
     /**

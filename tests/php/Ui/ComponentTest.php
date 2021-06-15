@@ -51,4 +51,20 @@ class ComponentTest extends TestCase
         $component = new Component('');
         $this->assertInstanceOf(ComponentContract::class, $component);
     }
+
+    public function testPropsArrayIsRendered()
+    {
+        $component = new Component('foo');
+        $component->prop('bar', new Component('baz'));
+
+        $this->assertEquals([
+            'name'  => 'foo',
+            'props' => [
+                'bar' => [
+                    'name'  => 'baz',
+                    'props' => [],
+                ],
+            ],
+        ], $component->toArray());
+    }
 }
