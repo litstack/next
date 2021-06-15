@@ -1,5 +1,5 @@
 <template>
-	<base-form v-bind="$attrs" />
+    <base-form v-bind="$attrs" />
 </template>
 
 <script>

@@ -4,19 +4,25 @@ import pickBy from 'lodash.pickby';
 let components = {};
 
 const addComponent = (name, component) => {
-	components[name] = component;
+    components[name] = component;
 };
 
 const use = (module) => {
-	module.install(addComponent);
+    module.install(addComponent);
 };
 
-const Component = (props) => {
-	const Component = components[props.is];
+const Component = (props, context) => {
+    if (!(props.is in components)) {
+        throw new Error(
+            `No dynamic component with name [${props.is}] registered.`
+        );
+    }
 
-	let passthru = pickBy(props, (value, key) => !['is', 'key'].includes(key));
+    const Component = components[props.is];
 
-	return <Component {...passthru} />;
+    let passthru = pickBy(props, (value, key) => !['is', 'key'].includes(key));
+
+    return <Component {...passthru} />;
 };
 
 export { addComponent, Component, use };
