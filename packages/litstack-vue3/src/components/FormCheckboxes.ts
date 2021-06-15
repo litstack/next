@@ -1,5 +1,6 @@
 import { defineComponent, h } from "vue";
 import { id } from '@litstackjs/litstack';
+import BaseFieldTitle from './FieldTitle';
 
 function updateFormValue(e, form, attribute, value) {
     console.log(e);
@@ -62,5 +63,5 @@ const BaseFormCheckboxes = defineComponent({
 });
 
 export default defineComponent({
-    components: { BaseFormCheckboxes },
+    components: { BaseFormCheckboxes, BaseFieldTitle },
 });;

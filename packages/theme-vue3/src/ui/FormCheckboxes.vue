@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5>{{ title }}</h5>
+        <base-field-title v-bind="$attrs" />
         <div>
             <base-form-checkboxes v-bind="$attrs" />
         </div>

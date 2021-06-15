@@ -1,4 +1,5 @@
 import { defineComponent, h } from "vue";
+import BaseFieldTitle from './FieldTitle';
 
 const template = `
     <component 
@@ -27,5 +28,5 @@ const BaseFormTextarea = defineComponent({
 });
 
 export default defineComponent({
-    components: { BaseFormTextarea },
+    components: { BaseFormTextarea, BaseFieldTitle },
 });;
