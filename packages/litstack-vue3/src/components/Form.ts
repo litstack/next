@@ -7,7 +7,7 @@ const template = `
             v-for="(component, index) in schema"
             v-bind="component.props || {}"
             :is="component.name"
-            :key="index"
+            :key="'f-'+index"
             :form="form"
         />
     </form>

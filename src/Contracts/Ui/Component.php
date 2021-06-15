@@ -29,4 +29,11 @@ interface Component
      * @return $this
      */
     public function setName($name);
+
+    /**
+     * Get component props.
+     *
+     * @return array
+     */
+    public function getProps();
 }
