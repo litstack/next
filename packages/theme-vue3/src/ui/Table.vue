@@ -22,15 +22,15 @@
     </table>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-import { BaseTh, BaseTd } from '@litstackjs/litstack-vue3';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { BaseTh, BaseTd, Index } from '@litstackjs/litstack-vue3';
 
 export default defineComponent({
     components: { BaseTh, BaseTd },
     props: {
         table: {
-            type: Object,
+            type: Object as PropType<Index>,
             required: true,
         },
     },
