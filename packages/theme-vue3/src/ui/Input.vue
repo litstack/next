@@ -1,9 +1,12 @@
 <template>
-	<base-input v-bind="$attrs" />
+    <base-input v-bind="$attrs" />
 </template>
 
 <script>
-import { Input } from '@litstackjs/litstack-vue3';
+import { defineComponent } from 'vue';
+import { Input as BaseInput } from '@litstackjs/litstack-vue3';
 
-export default Input;
+export default defineComponent({
+    components: { BaseInput },
+});
 </script>

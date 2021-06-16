@@ -1,13 +1,32 @@
 <template>
-	<div>
-		<index-search v-bind="{ ...$attrs, ...table }" />
-		<index-table v-bind="{ ...$attrs, ...table }" />
-		<index-pagination v-bind="{ ...$attrs, ...table }" />
-	</div>
+    <div>
+        <index-search v-bind="{ ...$attrs }" :table="table" />
+        <index-table v-bind="{ ...$attrs }" :table="table" />
+        <index-pagination v-bind="{ ...$attrs }" :table="table" />
+    </div>
 </template>
 
 <script>
-import { Index } from '@litstackjs/litstack-vue3';
+import { defineComponent } from 'vue';
+import {
+    createIndex,
+    IndexTable,
+    IndexSearch,
+    IndexPagination,
+} from '@litstackjs/litstack-vue3';
 
-export default Index;
+export default defineComponent({
+    components: {
+        IndexSearch,
+        IndexTable,
+        IndexPagination,
+    },
+    setup(props, { attrs }) {
+        const table = createIndex(attrs);
+
+        table.loadItems();
+
+        return { table };
+    },
+});
 </script>

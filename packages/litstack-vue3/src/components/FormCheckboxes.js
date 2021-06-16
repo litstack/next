@@ -1,5 +1,4 @@
 import { defineComponent, h } from "vue";
-import { id } from '@litstackjs/litstack';
 
 function updateFormValue(e, form, attribute, value) {
     console.log(e);
@@ -29,10 +28,10 @@ const template = `
             v-bind="checkboxComponent.props" 
             v-model="form[attribute]"
             :is="checkboxComponent.name" 
-            :id="id(value, false)"
+            :id="value"
             @input="updateFormValue($event, form, attribute, value)"
         />
-        <label v-html="label" :for="id(value)"/>
+        <label v-html="label" :for="value"/>
     </template>
 `;
 
@@ -57,7 +56,7 @@ const BaseFormCheckboxes = defineComponent({
         }
     },
     setup() {
-        return { id, updateFormValue }
+        return { updateFormValue }
     }
 });
 

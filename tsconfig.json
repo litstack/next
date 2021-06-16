@@ -2,14 +2,15 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
-        "noImplicitAny": false,
-        "sourceMap": false
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": false,
+        "jsx": "react-jsx",
     },
     "include": [
-        "resources/js/**/*.ts", 
-        "resources/js/**/*.d.ts", 
-        "resources/js/**/*.tsx", 
-        "resources/js/**/*.vue", 
-        "resources/js/**/*.js"
+        "packages/**/*.ts", 
+        "packages/**/*.d.ts", 
+        "packages/**/*.tsx", 
+        "packages/**/*.vue", 
+        "packages/**/*.js"
     ]
 }

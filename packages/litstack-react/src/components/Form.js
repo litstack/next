@@ -2,21 +2,19 @@ import { useForm } from '@inertiajs/inertia-react';
 import { Component } from '../components';
 import pickBy from 'lodash.pickby';
 
-const Form = (props) => {
-    let attributes = pickBy(props.model, (value, key) =>
-        props.attributes.includes(key)
+const Form = ({ model, attributes, route, schema }) => {
+    const form = useForm(
+        pickBy(model, (value, key) => attributes.includes(key))
     );
-
-    const form = useForm(attributes);
 
     function submit(e) {
         e.preventDefault();
-        form.put(props.route);
+        form.put(route);
     }
 
     return (
         <form onSubmit={submit}>
-            {props.schema.map((component, i) => (
+            {schema.map((component, i) => (
                 <Component
                     key={i}
                     is={component.name}

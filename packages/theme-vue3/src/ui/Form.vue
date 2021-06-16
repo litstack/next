@@ -3,7 +3,10 @@
 </template>
 
 <script>
-import { Form } from '@litstackjs/litstack-vue3';
+import { defineComponent } from 'vue';
+import { Form as BaseForm } from '@litstackjs/litstack-vue3';
 
-export default Form;
+export default defineComponent({
+    components: { BaseForm },
+});
 </script>

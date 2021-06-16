@@ -1,5 +1,4 @@
 import { Component } from '../components';
-import { id } from '@litstackjs/litstack';
 import pickBy from 'lodash.pickby';
 
 function updateFormValue(e, form, attribute, value) {
@@ -32,14 +31,14 @@ const FormCheckboxes = (props) => {
                 <Component
                     is={props.checkboxComponent.name}
                     {...props.checkboxComponent.props}
-                    id={id(value, false)}
+                    id={value}
                     onChange={(e) =>
                         updateFormValue(e, props.form, props.attribute, value)
                     }
                 />
                 <label
                     dangerouslySetInnerHTML={{ __html: props.options[value] }}
-                    htmlFor={id(value)}
+                    htmlFor={value}
                     className={props.labelClass}
                 />
             </div>

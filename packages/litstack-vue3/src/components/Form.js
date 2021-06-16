@@ -1,5 +1,5 @@
-import { defineComponent, h } from "vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { defineComponent, h } from 'vue';
+import { useForm } from '@inertiajs/inertia-vue3';
 
 const template = `
     <form @submit.prevent="submit()">
@@ -13,7 +13,7 @@ const template = `
     </form>
 `;
 
-let BaseForm = defineComponent({
+const Form = defineComponent({
     template,
     props: {
         schema: {
@@ -55,8 +55,4 @@ let BaseForm = defineComponent({
     },
 });
 
-export default defineComponent({
-    components: {
-        BaseForm,
-    },
-});
+export default Form;

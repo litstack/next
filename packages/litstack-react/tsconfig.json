@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "ES2020",
         "target": "ES2020",
-        "noImplicitAny": false,
-        "sourceMap": false
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "src",
+        "sourceMap": true, 
+        "outDir": "ts-build",
+        "jsx": "react-jsx",
     },
-    "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+    "exclude": [
+        "node_modules" // don't run on any code in the node_modules directory
+    ]
 }
