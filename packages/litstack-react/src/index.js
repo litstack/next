@@ -1,5 +1,6 @@
 export { addComponent, Component, use } from './components';
 export { default as Checkbox } from './components/Checkbox';
+export { default as FieldTitle } from './components/FieldTitle';
 export { default as Form } from './components/Form';
 export { default as FormCheckboxes } from './components/FormCheckboxes';
 export { default as FormInput } from './components/FormInput';

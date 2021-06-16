@@ -2,10 +2,13 @@
 
 namespace Ignite\Form\Fields;
 
+use Ignite\Contracts\Form\Fields\Titleable;
 use Ignite\Form\Field;
 
-class Textarea extends Field
+class Textarea extends Field implements Titleable
 {
+    use Traits\HasTitle;
+
     /**
      * The minimum number of rows to display.
      *

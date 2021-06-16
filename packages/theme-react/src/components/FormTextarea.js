@@ -1,9 +1,10 @@
+import { FieldTitle } from '@litstackjs/litstack-react';
 import { FormTextarea as BaseFormTextarea } from '@litstackjs/litstack-react';
 
 const FormTextarea = function (props) {
     return (
         <div>
-            <h5>{props.title}</h5>
+            <FieldTitle {...props} />
             <BaseFormTextarea {...props} />
         </div>
     );

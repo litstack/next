@@ -1,4 +1,5 @@
 import { defineComponent, h } from "vue";
+import BaseFieldTitle from './FieldTitle';
 
 const template = `<component :is="inputComponent.name" v-bind="inputComponent.props" v-model="form[attribute]"/>`;
 
@@ -21,5 +22,5 @@ const BaseFormInput = defineComponent({
 });
 
 export default defineComponent({
-    components: { BaseFormInput },
+    components: { BaseFormInput, BaseFieldTitle },
 });;

@@ -15,7 +15,7 @@ class FieldTextareaTest extends TestCase
         $this->assertSame(5, $field->rows);
     }
 
-    public function testComponent()
+    public function testRendering()
     {
         $field = new Textarea('foo');
         $this->assertInstanceOf(Component::class, $component = $field->getComponent());

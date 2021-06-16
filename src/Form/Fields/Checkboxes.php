@@ -2,10 +2,13 @@
 
 namespace Ignite\Form\Fields;
 
+use Ignite\Contracts\Form\Fields\Titleable;
 use Ignite\Form\Field;
 
-class Checkboxes extends Field
+class Checkboxes extends Field implements Titleable
 {
+    use Traits\HasTitle;
+
     /**
      * Checkbox options.
      *

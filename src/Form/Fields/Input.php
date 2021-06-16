@@ -2,10 +2,13 @@
 
 namespace Ignite\Form\Fields;
 
+use Ignite\Contracts\Form\Fields\Titleable;
 use Ignite\Form\Field;
 
-class Input extends Field
+class Input extends Field implements Titleable
 {
+    use Traits\HasTitle;
+
     /**
      * The ui component name that represents the field.
      *
