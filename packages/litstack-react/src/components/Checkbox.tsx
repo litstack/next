@@ -1,4 +1,6 @@
-const Checkbox = (props) => {
+import { TCheckbox } from '../..';
+
+const Checkbox : TCheckbox = (props) => {
     return <input type="checkbox" {...props} />;
 };
 

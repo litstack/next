@@ -24,10 +24,10 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { BaseTh, BaseTd, Index } from '@litstackjs/litstack-vue3';
+import { Th, Td, Index } from '@litstackjs/litstack-vue3';
 
 export default defineComponent({
-    components: { BaseTh, BaseTd },
+    components: { Th, Td },
     props: {
         table: {
             type: Object as PropType<Index>,

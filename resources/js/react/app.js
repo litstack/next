@@ -8,11 +8,11 @@ import { plugin as LitstackTheme } from '@litstackjs/theme-react';
 const el = document.getElementById('app');
 
 render(
-	<App
-		initialPage={JSON.parse(el.dataset.page)}
-		resolveComponent={(name) => require(`./Pages/${name}`).default}
-	/>,
-	el
+    <App
+        initialPage={JSON.parse(el.dataset.page)}
+        resolveComponent={(name) => require(`./Pages/${name}`).default}
+    />,
+    el
 );
 
 use(LitstackTheme);

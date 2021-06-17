@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
 
 class FieldCheckboxesTest extends TestCase
 {
-    public function testOptionsGetter()
+    public function testOptions()
     {
         $field = new Checkboxes('foo', ['bar' => 'Bar']);
-        $this->assertEquals(['bar' => 'Bar'], $field->getOptions());
+        $this->assertEquals(['bar' => 'Bar'], $field->options);
     }
 
-    public function testComponent()
+    public function testRendering()
     {
         $field = new Checkboxes('foo', ['bar' => 'Bar']);
         $this->assertInstanceOf(Component::class, $component = $field->getComponent());

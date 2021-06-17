@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2020",
+        "lib": ["es6", "ES2020"],
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "sourceMap": false,
+        "jsx": "preserve",
+    },
+    "include": [
+        "packages/**/*.ts", 
+        "packages/**/*.d.ts", 
+        "packages/**/*.tsx", 
+        "packages/**/*.vue", 
+        "packages/**/*.js"
+    ]
+}

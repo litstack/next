@@ -2,7 +2,7 @@
     <base-input v-bind="$attrs" />
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import { Input as BaseInput } from '@litstackjs/litstack-vue3';
 

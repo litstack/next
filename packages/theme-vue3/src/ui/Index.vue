@@ -6,10 +6,11 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
+import { UseIndexAttrs } from '@litstackjs/litstack';
 import {
-    createIndex,
+    useIndex,
     IndexTable,
     IndexSearch,
     IndexPagination,
@@ -22,7 +23,7 @@ export default defineComponent({
         IndexPagination,
     },
     setup(props, { attrs }) {
-        const table = createIndex(attrs);
+        const table = useIndex(<UseIndexAttrs>attrs);
 
         table.loadItems();
 

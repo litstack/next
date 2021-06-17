@@ -1,12 +1,11 @@
+import { FieldTitle } from '@litstackjs/litstack-react';
 import { FormCheckboxes as BaseFormCheckboxes } from '@litstackjs/litstack-react';
 
-const FormCheckbox = function (props) {
+export default function FormCheckbox(props) {
     return (
         <div>
-            <h5>{props.title}</h5>
+            <FieldTitle {...props} />
             <BaseFormCheckboxes {...props} />
         </div>
     );
-};
-
-export default FormCheckbox;
+}

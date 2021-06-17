@@ -1,36 +1,82 @@
 import * as Litstack from '@litstackjs/litstack'
-import { DefineComponent, FunctionalComponent, Ref } from 'vue'
+import { DefineComponent, FunctionalComponent, Plugin } from 'vue'
 import { InertiaForm } from '@inertiajs/inertia-vue3';
 
-export declare type Form = DefineComponent<Litstack.FormProps>;
+type Data = Record<string, undefined>;
+type Model = Record<string, any>;
+
+export const plugin: Plugin;
+
+type TLitstackForm<TItem = Model> = InertiaForm<TItem> & {
+    submit(e: Event | any): void
+}
+
+type TuseForm<TItem = Model> = (props: Litstack.UseFormProps) => TLitstackForm<TItem>;
+export const useForm : TuseForm;
+
+type TFormProps = Litstack.FormProps & {
+    form: TLitstackForm
+}
+type TForm = FunctionalComponent<TFormProps>;
+export const Form : TForm;
 
 interface Index<TItem = any> {
-    busy: Ref<boolean>,
-    perPage: Ref<number>,
-    items: Ref<Record<string, TItem>[]>,
-    hasNextPage: Ref<boolean>,
-    perhasPrevPagePage: Ref<boolean>,
-    currentPage: Ref<number>,
-    filters: Ref<Litstack.Component[]>,
-    search: Ref<string>,
-    fromItem: Ref<number>,
-    toItem: Ref<number>,
-    totalItems: Ref<number>,
+    busy: boolean,
+    perPage: number,
+    items: TItem[],
+    hasNextPage: boolean,
+    hasPrevPage: boolean,
+    currentPage: number,
+    filters: any[],
+    search: string,
+    fromItem: number,
+    toItem: number,
+    totalItems: number,
     reload: () => void
     loadItems: () => void,
+    addFilter: (filter: string) => void,
     removeFilter: (filter: string) => void,
     setPage: (page: number) => void
     nextPage: () => void,
     prevPage: () => void,
     lastPage: () => void,
+    updateSearch: (e: string | object) => void
 }
+type TuseIndex<TItem = Model> = (props: Litstack.UseIndexProps) => Index<TItem>;
+export const useIndex : TuseIndex;
 
-export declare function createIndex<TItem>(props: Litstack.CreateIndexProps | Record<string, unknown>): Index<TItem>;
+type TIndexSearch = FunctionalComponent<Litstack.IndexSearchProps>;
+export const IndexSearch : TIndexSearch;
 
-export declare type IndexSearch = DefineComponent<Litstack.IndexSearchProps>;
+type TIndexTable = FunctionalComponent<Litstack.IndexTableProps>;
+export const IndexTable : TIndexTable;
 
-export declare type IndexTable = DefineComponent<Litstack.IndexTableProps>;
+type TIndexPagination = FunctionalComponent<Litstack.IndexPaginationProps>
+export const IndexPagination : TIndexPagination;
 
-export declare type IndexPagination = DefineComponent<Litstack.IndexPaginationProps>;
+type TFormInput = FunctionalComponent<Litstack.FormInputProps<InertiaForm<Record<string, any>>>>;
+export const FormInput : TFormInput;
 
-export declare type FormInput = FunctionalComponent<Litstack.FormInputProps<InertiaForm<Record<string, any>>>>;
+type TFormTextarea = FunctionalComponent<Litstack.FormTextareatProps<InertiaForm<Record<string, any>>>>;
+export const FormTextarea : TFormTextarea;
+
+type TFormCheckboxes = FunctionalComponent<Litstack.FormCheckboxesProps<InertiaForm<Record<string, any>>>>;
+export const FormCheckboxes : TFormCheckboxes;
+
+type TTd = FunctionalComponent<Litstack.TdProps>;
+export const Td : TTd;
+
+type TTh = FunctionalComponent<Litstack.ThProps>;
+export const Th : TTh;
+
+type TTextarea = FunctionalComponent<Data>;
+export const Textarea : TTextarea;
+
+type TInput = FunctionalComponent<Data>;
+export const Input : TInput;
+
+type TCheckbox = FunctionalComponent<Data>;
+export const Checkbox : TCheckbox;
+
+type TFieldTitle = FunctionalComponent<Litstack.FieldTitleProps>;
+export const FieldTitle : TFieldTitle;

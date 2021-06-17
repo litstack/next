@@ -3,6 +3,7 @@
 namespace Ignite\Form;
 
 use Ignite\Contracts\Form\Field as FieldContract;
+use Ignite\Contracts\Ui\Component;
 
 abstract class Field implements FieldContract
 {
@@ -12,13 +13,6 @@ abstract class Field implements FieldContract
      * @var string
      */
     protected $attribute;
-
-    /**
-     * The field title.
-     *
-     * @var string
-     */
-    protected $title;
 
     /**
      * The parent form instance that the field is bound to.
@@ -56,13 +50,6 @@ abstract class Field implements FieldContract
         //
     }
 
-    public function title($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     /**
      * Bind the field to the given form.
      *
@@ -83,12 +70,31 @@ abstract class Field implements FieldContract
     {
         $component = component($this->componentName, [
             'attribute' => $this->attribute,
-            'title'     => $this->title,
         ]);
+
+        $this->mountTraits($component);
 
         $this->mount($component);
 
         return $component;
+    }
+
+    /**
+     * Call mount mehtodes of traits.
+     *
+     * @param  \Ignite\Contracts\Ui\Component $component
+     * @return void
+     */
+    protected function mountTraits(Component $component)
+    {
+        $traits = array_values(class_uses_recursive($this));
+
+        foreach ($traits as $trait) {
+            $method = 'mount'.class_basename($trait);
+            if (method_exists($this, $method)) {
+                call_user_func_array([$this, $method], [$component]);
+            }
+        }
     }
 
     /**
