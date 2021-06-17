@@ -1,6 +1,7 @@
 import { resolveComponent, h } from 'vue';
+import { TFormInput } from '../..';
 
-export default function FormInput({ form, attribute, inputComponent }) {
+const FormInput : TFormInput = function({ form, attribute, inputComponent }) {
     const Input = resolveComponent(inputComponent.name);
 
     return h(Input, {
@@ -12,3 +13,5 @@ export default function FormInput({ form, attribute, inputComponent }) {
         },
     });
 }
+
+export default FormInput;

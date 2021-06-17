@@ -1,6 +1,7 @@
 import { h } from 'vue';
+import { TInput } from '../..';
 
-export default function Input({}, { attrs, emit }) {
+export const Input : TInput = function({}, { attrs, emit }) {
     return h(`input`, {
         value: attrs.modelValue,
         onInput: ({ target }) => emit('update:modelValue', target.value),
