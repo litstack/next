@@ -7,3 +7,5 @@ export const Input : TInput = function({}, { attrs, emit }) {
         onInput: ({ target }) => emit('update:modelValue', target.value),
     });
 }
+
+export default Input;

@@ -10,4 +10,4 @@ export {
     IndexPagination,
 } from './components/Index';
 export { default as Input } from './components/Input';
-export { BaseTh, BaseTd } from './components/Table';
+export { Th, Td } from './components/Table';
