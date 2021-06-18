@@ -2,12 +2,12 @@
 
 namespace Ignite\Ui;
 
-use Inertia\Inertia;
-use Inertia\Response;
-use Ignite\Ui\Table\Table;
 use Ignite\Contracts\Form\Form;
 use Ignite\Contracts\Ui\Page as PageContract;
+use Ignite\Ui\Table\Table;
 use Illuminate\Contracts\Support\Responsable;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class Page implements PageContract, Responsable
 {

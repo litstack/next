@@ -2,9 +2,8 @@
 
 namespace Ignite\Ui\Table;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -20,7 +19,7 @@ abstract class Table
     /**
      * Default number of items per page.
      *
-     * @var integer
+     * @var int
      */
     protected $defaultPerPage = 10;
 
@@ -34,7 +33,7 @@ abstract class Table
     /**
      * Indicates wether the url should be synchronised.
      *
-     * @var boolean
+     * @var bool
      */
     protected $syncUrl = false;
 

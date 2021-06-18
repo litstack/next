@@ -37,7 +37,7 @@ class Schema
     }
 
     /**
-     * Add a file.d
+     * Add a file.d.
      *
      * @param Field $field
      * @return $this
