@@ -1,12 +1,12 @@
 import {
-    createIndex,
+    useIndex,
     IndexSearch,
     IndexTable,
     IndexPagination,
 } from '@litstackjs/litstack-react';
 
 function Index(props) {
-    const table = createIndex(props);
+    const table = useIndex(props);
 
     return (
         <div>

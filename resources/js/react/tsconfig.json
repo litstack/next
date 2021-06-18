@@ -2,17 +2,18 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "ES2020",
-        "lib": ["es6", "ES2020"],
+        "lib": ["es6", "dom", "ES2020"],
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
         "allowJs": true,
         "sourceMap": false,
         "jsx": "react-jsx",
     },
+    "exclude": ["node_modules"],
     "include": [
-        "packages/**/*.ts", 
-        "packages/**/*.d.ts", 
-        "packages/**/*.tsx", 
-        "packages/**/*.js"
+        "./**/*.ts", 
+        "./**/*.d.ts", 
+        "./**/*.tsx", 
+        "./**/*.js"
     ]
 }

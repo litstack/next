@@ -11,6 +11,8 @@ type TPlugin = {
 }
 export const plugin: TPlugin;
 
+export declare function use(plugin: TPlugin);
+
 type ReactComponentProps = Litstack.Component & {
     key?: unknown,
     [key: string]: any
