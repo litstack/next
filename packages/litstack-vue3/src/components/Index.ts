@@ -7,7 +7,7 @@ export const IndexSearch : TIndexSearch = function({ searchComponent, table }, {
         ...attrs,
         ...searchComponent.props,
         modelValue: table.search,
-        'onUpdate:modelValue': table.updateSearch
+        'onUpdate:modelValue': debounce((e) => table.updateSearch(e), 500)
     });
 }
 
@@ -40,9 +40,9 @@ const useIndex : TuseIndex = function useIndex({ route, syncUrl = false, default
         totalItems: 0,
         loadItems() {
             this.busy = true;
-            fetch(this.__getUrl())
+            return fetch(this.__getUrl())
                 .then(response => response.json())
-                .then(this.__update)
+                .then(data => this.__update(data))
                 .catch(() => this.busy = false);
         },
         reload() {
@@ -79,7 +79,8 @@ const useIndex : TuseIndex = function useIndex({ route, syncUrl = false, default
         lastPage() {
             this.setPage(this.getLastPage());
         },
-        updateSearch: debounce((e) => {
+        updateSearch(e) {
+            console.log(this);
             if(e instanceof Event) {
                 this.search = (<HTMLTextAreaElement>e.target).value;
             } else {
@@ -87,7 +88,7 @@ const useIndex : TuseIndex = function useIndex({ route, syncUrl = false, default
             }
             
             this.reload();
-        }, 500),
+        },
         __update(data) {
             this.items = data.data;
             this.totalItems = data.meta.total;

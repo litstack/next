@@ -37,8 +37,8 @@ interface Index<TItem = any> {
     fromItem: number,
     toItem: number,
     totalItems: number,
-    reload: () => void
-    loadItems: () => void,
+    reload: () => Promise<any>
+    loadItems: () => Promise<any>,
     addFilter: (filter: string) => void,
     removeFilter: (filter: string) => void,
     setPage: (page: number) => void
