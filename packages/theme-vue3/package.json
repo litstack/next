@@ -9,6 +9,7 @@
     "author": "",
     "license": "MIT",
     "devDependencies": {
+        "@litstackjs/litstack": "file:../litstack",
         "@litstackjs/litstack-vue3": "file:../litstack-vue3",
         "@vue/compiler-sfc": "^3.1.0",
         "vue": "^3.0.0"

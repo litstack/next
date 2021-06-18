@@ -1,27 +1,10 @@
-import { defineComponent, h, Ref } from "vue";
+import { h } from 'vue';
+import { TTh, TTd } from '../..';
 
-const BaseTh = (props) => {
-    return h(`th`, {}, props.label);
-};
+export const Th : TTh = function({ column }) {
+    return h(`th`, {}, column.label);
+}
 
-const BaseTd = (props) => {
-    return h(`td`, {}, props.item[props.value]);
-};
-
-export default defineComponent({
-    components: { BaseTh, BaseTd },
-    props: {
-        schema: {
-            type: Array,
-            required: true
-        },
-        items: {
-            type: Object,
-            required: true
-        },
-        busy: {
-            type: Object,
-            default: false
-        }
-    }
-});
+export const Td : TTd = function({ item, column }) {
+    return h(`td`, {}, item[column.value]);
+}

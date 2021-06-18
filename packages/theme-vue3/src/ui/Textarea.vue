@@ -2,8 +2,11 @@
     <base-textarea v-bind="$attrs" />
 </template>
 
-<script>
-import { Textarea } from '@litstackjs/litstack-vue3';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { Textarea as BaseTextarea } from '@litstackjs/litstack-vue3';
 
-export default Textarea;
+export default defineComponent({
+    components: { BaseTextarea },
+});
 </script>

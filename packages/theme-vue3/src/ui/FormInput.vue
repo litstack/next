@@ -1,12 +1,15 @@
 <template>
     <div>
-        <base-field-title v-bind="$attrs" />
-        <base-form-input v-bind="$attrs" />
+        <field-title v-bind="$attrs" />
+        <form-input v-bind="$attrs" />
     </div>
 </template>
 
-<script>
-import { FormInput } from '@litstackjs/litstack-vue3';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { FormInput, FieldTitle } from '@litstackjs/litstack-vue3';
 
-export default FormInput;
+export default defineComponent({
+    components: { FormInput, FieldTitle },
+});
 </script>

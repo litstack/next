@@ -1,17 +1,13 @@
-import { defineComponent } from "vue";
 import { h } from 'vue';
+import { TCheckbox } from "../..";
 
-let BaseCheckbox = (props, context) => {
+const Checkox : TCheckbox = function({}, { attrs, emit }) {
     return h(`input`, {
+        ...attrs,
         type: 'checkbox',
-        value: context.attrs.modelValue,
-        onInput: ($event) => context.emit("update:modelValue", $event.target.value),
-        ...props
+        value: attrs.modelValue,
+        onInput: (e) => emit("update:modelValue", e.target.value),
     });
 };
 
-export default defineComponent({
-    components: {
-        BaseCheckbox,
-    },
-});
+export default Checkox;

@@ -1,0 +1,49 @@
+{
+    "name": "litstack",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/litstack/future.git"
+    },
+    "author": "Lennart Carstens-Behrens",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/litstack/future/issues"
+    },
+    "homepage": "https://github.com/litstack/future#readme",
+    "devDependencies": {
+        "@babel/preset-react": "^7.13.13",
+        "@inertiajs/inertia": "^0.9.2",
+        "@inertiajs/inertia-react": "^0.6.2",
+        "@inertiajs/progress": "^0.2.5",
+        "@litstackjs/litstack": "file:./../../../packages/litstack",
+        "@litstackjs/litstack-react": "file:./../../../packages/litstack-react",
+        "@litstackjs/theme-react": "file:./../../../packages/theme-react",
+        "babel-runtime": "^6.26.0",
+        "install": "^0.13.0",
+        "laravel-mix": "^6.0.19",
+        "npm": "^7.15.1",
+        "postcss": "^8.3.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "tailwindcss": "^2.1.4",
+        "ts-loader": "^9.2.2",
+        "typescript": "^4.3.2"
+    },
+    "dependencies": {
+        "@types/react": "^17.0.11"
+    }
+}

@@ -1,26 +1,17 @@
-import { defineComponent, h } from "vue";
-import BaseFieldTitle from './FieldTitle';
+import { resolveComponent, h } from 'vue';
+import { TFormInput } from '../..';
 
-const template = `<component :is="inputComponent.name" v-bind="inputComponent.props" v-model="form[attribute]"/>`;
+const FormInput : TFormInput = function({ form, attribute, inputComponent }) {
+    const Input = resolveComponent(inputComponent.name);
 
-const BaseFormInput = defineComponent({
-    template,
-    props: {
-        form: {
-            type: Object,
-            required: true,
-        }, 
-        attribute: {
-            type: String,
-            required: true
-        }, 
-        inputComponent: {
-            type: Object,
-            required: true
-        }
-    },
-});
+    return h(Input, {
+        ...inputComponent.props,
+        modelValue: form[attribute],
+        'onUpdate:modelValue': (value) => {
+            form[attribute] = value;
+            console.log(value, form[attribute]);
+        },
+    });
+}
 
-export default defineComponent({
-    components: { BaseFormInput, BaseFieldTitle },
-});;
+export default FormInput;

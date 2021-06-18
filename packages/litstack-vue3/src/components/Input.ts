@@ -1,15 +1,11 @@
-import { defineComponent } from "vue";
 import { h } from 'vue';
+import { TInput } from '../..';
 
-let BaseInput = (props, context) => {
+export const Input : TInput = function({}, { attrs, emit }) {
     return h(`input`, {
-        value: context.attrs.modelValue,
-        onInput: ($event) => context.emit("update:modelValue", $event.target.value)
+        value: attrs.modelValue,
+        onInput: ({ target }) => emit('update:modelValue', target.value),
     });
-};
+}
 
-export default defineComponent({
-    components: {
-        BaseInput,
-    },
-});
+export default Input;

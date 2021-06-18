@@ -1,12 +1,15 @@
 <template>
     <div>
-        <base-field-title v-bind="$attrs" />
-        <base-form-textarea v-bind="$attrs" />
+        <field-title v-bind="$attrs" />
+        <form-textarea v-bind="$attrs" />
     </div>
 </template>
 
-<script>
-import { FormTextarea } from '@litstackjs/litstack-vue3';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { FormTextarea, FieldTitle } from '@litstackjs/litstack-vue3';
 
-export default FormTextarea;
+export default defineComponent({
+    components: { FormTextarea, FieldTitle },
+});
 </script>

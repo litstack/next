@@ -1,187 +1,117 @@
-import { defineComponent, watchEffect, ref } from "vue";
+import { resolveComponent, ref, h, reactive } from "vue";
+import { TIndexSearch, TIndexTable, TIndexPagination, TuseIndex } from "../.."; 
 const debounce = require('lodash.debounce');
 
-const IndexSearch = defineComponent({
-    props: {
-        searchComponent: {
-            type: Object
-        }
-    },
-    template: `
-        <component 
-            :is="searchComponent.name" 
-            v-bind="{ ...searchComponent.props, ...$attrs }" 
-        />
-    `
-});
+export const IndexSearch : TIndexSearch = function({ searchComponent }, { attrs }) {
+    return h(resolveComponent(searchComponent.name), {
+        ...attrs,
+        ...searchComponent.props,
+    });
+}
 
-const IndexTable = defineComponent({
-    props: {
-        tableComponent: {
-            type: Object
-        }
-    },
-    template: `
-        <component 
-            :is="tableComponent.name" 
-            v-bind="{ ...tableComponent.props, ...$attrs }" 
-        />
-    `
-});
+export const IndexTable : TIndexTable = function({ tableComponent }, { attrs }) {
+    return h(resolveComponent(tableComponent.name), {
+        ...attrs,
+        ...tableComponent.props,
+    });
+}
 
-const IndexPagination = defineComponent({
-    props: {
-        paginationComponent: {
-            type: Object
-        }
-    },
-    template: `
-        <component 
-            :is="paginationComponent.name" 
-            v-bind="{ ...paginationComponent.props, ...$attrs }" 
-        />
-    `
-});
+export const IndexPagination : TIndexPagination = function({ paginationComponent }, { attrs }) {
+    return h(resolveComponent(paginationComponent.name), {
+        ...attrs,
+        ...paginationComponent.props,
+    });
+}
 
-export default defineComponent({
-    components: {
-        IndexTable,
-        IndexSearch,
-        IndexPagination
-    },
-    props: {
-        syncUrl: {
-            type: Boolean,
-        },
-        route: {
-            type: String,
-            required: true,
-        },
-        defaultPerPage: {
-            type: Number,
-            required: true
-        }
-    },
-    setup(props) {
-        let busy = ref<boolean>(false);
-        let perPage = ref<number>(props.defaultPerPage);
-        let items = ref([]);
-        let hasNextPage = ref<boolean>(false);
-        let hasPrevPage = ref<boolean>(false);
-        let currentPage = ref<number>(1);
-        let filters = ref([]);
-        let search = ref<string>("");
-        let fromItem = ref<number>(0);
-        let toItem = ref<number>(0);
-        let totalItems = ref<number>(0);
-
-        function getUrl() {
-            let params = [
-                `page=${currentPage.value}`,
-                `search=${encodeURIComponent(search.value)}`
-            ];
-
-            for(let i=0;i<filters.value.length;i++) {
-                params.push(`fitlers[]=${encodeURIComponent(filters.value[i])}`);
-            }
-
-            return `${props.route}?${params.join('&')}`;
-        }
-
-        function getLastPage() {
-            return Math.ceil(totalItems.value / perPage.value);
-        }
-
-        function update(data) {
-            items.value = data.data;
-            totalItems.value = data.meta.total;
-            fromItem.value = data.meta.from;
-            toItem.value = data.meta.to;
-            perPage.value = data.meta.per_page;
-            hasNextPage.value = currentPage.value < getLastPage();
-            hasPrevPage.value = currentPage.value > 1;
-
-            busy.value = false;
-        };
-
-        function loadItems() {
-            busy.value = true;
-            fetch(getUrl())
+const useIndex : TuseIndex = function useIndex({ route, syncUrl = false, defaultPerPage = 10 }) {
+    let index = reactive({
+        busy: false,
+        perPage: defaultPerPage,
+        items: [],
+        hasNextPage: false,
+        hasPrevPage: false,
+        currentPage: 1,
+        filters: [],
+        search: "",
+        fromItem: 0,
+        toItem: 0,
+        totalItems: 0,
+        loadItems() {
+            this.busy = true;
+            fetch(this.__getUrl())
                 .then(response => response.json())
-                .then(update)
-                .catch(() => busy.value = false);
-        }
-        
-        function reload() {
-            loadItems();
-        }
-
-        function addFilter(newFilter) {
-            filters.value.push(newFilter);
-            reload();
-        }
-
-        function removeFilter(removedFilter) {
+                .then(this.__update)
+                .catch(() => this.busy = false);
+        },
+        reload() {
+            return this.loadItems();
+        },
+        addFilter(filter) {
+            this.filters.push(filter);
+            this.reload();
+        },
+        removeFilter(filter) {
             //
-            reload();
-        }
-
-        let updateSearch = debounce(($event) => {
-            if(typeof $event == 'object' && 'target' in $event) {
-                search.value = $event.target.value;
-            } else {
-                search.value = $event;
-            }
-            
-            reload();
-
-            console.log(search.value);
-        }, 500);
-        
-
-        function setPage(newPage) {
-            if(newPage < 1 || newPage > getLastPage()) {
+            this.reload();
+        },
+        getLastPage() {
+            return Math.ceil(this.totalItems / this.perPage);
+        },
+        setPage(newPage) {
+            if(this.newPage < 1 || this.newPage > this.getLastPage()) {
                 return;
             }
-            currentPage.value = newPage;
-            reload();
-        }
+    
+            this.currentPage = newPage;
+    
+            this.reload();
+        },
+        nextPage() {
+            this.setPage(this.currentPage+1);
+        },
+    
+        prevPage() {
+            this.setPage(this.currentPage-1);
+        },
 
-        function nextPage() {
-            setPage(currentPage.value+1);
-        }
-
-        function prevPage() {
-            setPage(currentPage.value-1);
-        }
-
-        function lastPage() {
-            setPage(getLastPage());
-        }
-
-        loadItems();
-
-        return { 
-            table: {
-                search,
-                busy, 
-                items, 
-                totalItems,
-                fromItem,
-                toItem,
-                hasNextPage,
-                hasPrevPage,
-                currentPage,
-                perPage,
-                reload, 
-                addFilter, 
-                removeFilter, 
-                updateSearch, 
-                setPage, 
-                nextPage, 
-                prevPage,
-                lastPage,
+        lastPage() {
+            this.setPage(this.getLastPage());
+        },
+        updateSearch: debounce((e) => {
+            if(e instanceof Event) {
+                this.search = (<HTMLTextAreaElement>e.target).value;
+            } else {
+                this.search = e;
             }
-        };
-    },
-});
+            
+            this.reload();
+        }, 500),
+        __update(data) {
+            this.items = data.data;
+            this.totalItems = data.meta.total;
+            this.fromItem = data.meta.from;
+            this.toItem = data.meta.to;
+            this.perPage = data.meta.per_page;
+            this.hasNextPage = this.currentPage < this.getLastPage();
+            this.hasPrevPage = this.currentPage > 1;
+    
+            this.busy = false;
+        },
+        __getUrl() {
+            let params = [
+                `page=${this.currentPage}`,
+                `search=${encodeURIComponent(this.search)}`
+            ];
+    
+            for(let i=0;i<this.filters.length;i++) {
+                params.push(`fitlers[]=${encodeURIComponent(this.filters[i])}`);
+            }
+    
+            return `${route}?${params.join('&')}`;
+        }
+    });
+
+    return index;
+};
+
+export default useIndex;

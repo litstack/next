@@ -1,67 +1,42 @@
-import { defineComponent, h } from "vue";
-import { id } from '@litstackjs/litstack';
-import BaseFieldTitle from './FieldTitle';
+import { h, resolveComponent } from "vue";
+import { TFormCheckboxes } from "../..";
 
-function updateFormValue(e, form, attribute, value) {
-    console.log(e);
-    let original = form.data[attribute];
-
-    if (!Array.isArray(original)) {
-        original = [];
-    }
-
-    if (e.target.checked && !(value in original)) {
-        original.push(value);
-    }
-
-    if (!e.target.checked) {
-        original = original.filter((v) => !v == value);
-    }
-
-    form[attribute] = original;
-}
-
-const template = `
-    <template
-        v-for="(label, value) in options"
-        :key="value"
-    >
-        <component
-            v-bind="checkboxComponent.props" 
-            v-model="form[attribute]"
-            :is="checkboxComponent.name" 
-            :id="id(value, false)"
-            @input="updateFormValue($event, form, attribute, value)"
-        />
-        <label v-html="label" :for="id(value)"/>
-    </template>
-`;
-
-const BaseFormCheckboxes = defineComponent({
-    template,
-    props: {
-        form: {
-            type: Object,
-            required: true,
-        }, 
-        attribute: {
-            type: String,
-            required: true
-        }, 
-        checkboxComponent: {
-            type: Object,
-            required: true
-        },
-        options: {
-            required: true,
-            type: Object
+const FormCheckboxes : TFormCheckboxes = function({form, attribute, checkboxComponent, options}) {
+    const CheckBoxComponent = resolveComponent(checkboxComponent.name);
+    let children = [];
+    let updateFormValue = (e, value) => {
+        let original = form.data[attribute];
+    
+        if (!Array.isArray(original)) {
+            original = [];
         }
-    },
-    setup() {
-        return { id, updateFormValue }
+    
+        if (e.target.checked && !(value in original)) {
+            original.push(value);
+        }
+    
+        if (!e.target.checked) {
+            original = original.filter((v) => !v == value);
+        }
+    
+        form[attribute] = original;
     }
-});
+    
 
-export default defineComponent({
-    components: { BaseFormCheckboxes, BaseFieldTitle },
-});;
+    for(let value in options) {
+        let id = value;
+        let Checkbox = h(CheckBoxComponent, {
+            ...checkboxComponent.props,
+            id,
+            onInput: e => updateFormValue(e, value)
+        });
+        let Label = h(`label`, {for: id, innerHtml: options[value]});
+        children.push(h(`template`, {
+            key:value
+        }, [Checkbox, Label]));
+    }
+
+    return children;
+};
+
+export default FormCheckboxes;

@@ -2,8 +2,11 @@
     <base-checkbox v-bind="$attrs" />
 </template>
 
-<script>
-import { Checkbox } from '@litstackjs/litstack-vue3';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { Checkbox as BaseCheckbox } from '@litstackjs/litstack-vue3';
 
-export default Checkbox;
+export default defineComponent({
+    components: { BaseCheckbox },
+});
 </script>

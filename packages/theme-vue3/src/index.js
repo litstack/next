@@ -4,7 +4,6 @@ import FormCheckboxes from './ui/FormCheckboxes.vue';
 import FormInput from './ui/FormInput.vue';
 import FormTextarea from './ui/FormTextarea.vue';
 import Index from './ui/Index.vue';
-import IndexSearch from './ui/IndexSearch.vue';
 import Input from './ui/Input.vue';
 import Pagination from './ui/Pagination.vue';
 import Table from './ui/Table.vue';
@@ -18,7 +17,6 @@ const plugin = {
         app.component('UiFormInput', FormInput);
         app.component('UiFormTextarea', FormTextarea);
         app.component('UiIndex', Index);
-        app.component('UiIndexSearch', IndexSearch);
         app.component('UiInput', Input);
         app.component('UiPagination', Pagination);
         app.component('UiTable', Table);

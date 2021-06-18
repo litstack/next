@@ -1,63 +1,49 @@
-import { defineComponent, h } from "vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { h, reactive, resolveComponent } from 'vue';
+import { useForm as useInertiaForm } from '@inertiajs/inertia-vue3';
+import { TForm, TuseForm } from '../..';
 
-const template = `
-    <form @submit.prevent="submit()">
-        <component
-            v-for="(component, index) in schema"
-            v-bind="component.props || {}"
-            :is="component.name"
-            :key="'f-'+index"
-            :form="form"
-        />
-        <button @click.prevent="submit()">Save</button>
-    </form>
-`;
+export const Form : TForm = function({ schema, form }) {
+    let children = [];
 
-let BaseForm = defineComponent({
-    template,
-    props: {
-        schema: {
-            type: Array,
-            required: true,
+    for(let i = 0;i<schema.length;i++) {
+        let Child = resolveComponent(schema[i].name);
+
+        children.push(h(Child, {
+            ...schema[i].props,
+            key:`f-${i}`,
+            form
+        }));
+    }
+
+    return h(`form`, {
+        submit: form.submit
+    }, children);
+}
+
+const useForm : TuseForm = function({ model, attributes, route, store }) {
+    let data = Object.keys(model)
+        .filter((key) => attributes.includes(key))
+        .reduce((obj, key) => {
+            obj[key] = model[key];
+            return obj;
+        }, {});
+
+    let form = reactive({
+        ...useInertiaForm(data),
+        submit(e) {
+            if(e instanceof Event) {
+                e.preventDefault();
+            }
+            form.put(route);
         },
-        model: {
-            type: Object,
-            required: true,
-        },
-        route: {
-            type: String,
-            required: true,
-        },
-        store: {
-            type: Boolean,
-            default: false,
-        },
-        attributes: {
-            type: Array,
-            required: true,
-        },
-    },
-    setup(props) {
-        let attributes = Object.keys(props.model)
-            .filter((key) => props.attributes.includes(key))
-            .reduce((obj, key) => {
-                obj[key] = props.model[key];
-                return obj;
-            }, {});
+        get: undefined,
+        post: undefined,
+        put: undefined,
+        patch: undefined,
+        delete: undefined,
+    });
 
-        const form = useForm(attributes);
+    return form;
+}
 
-        function submit() {
-            form.put(props.route);
-        }
-
-        return { form, submit };
-    },
-});
-
-export default defineComponent({
-    components: {
-        BaseForm,
-    },
-});
+export default useForm;

@@ -1,21 +1,20 @@
 <template>
     <div>
-        <base-field-title v-bind="$attrs" />
+        <field-title v-bind="$attrs" />
         <div>
-            <base-form-checkboxes v-bind="$attrs" />
+            <form-checkboxes v-bind="$attrs" />
         </div>
     </div>
 </template>
 
-<script>
-import { FormCheckboxes } from '@litstackjs/litstack-vue3';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { FormCheckboxes, FieldTitle } from '@litstackjs/litstack-vue3';
 
-FormCheckboxes.props = {
-    title: {
-        type: String,
-        required: true,
+export default defineComponent({
+    components: {
+        FormCheckboxes,
+        FieldTitle,
     },
-};
-
-export default FormCheckboxes;
+});
 </script>
