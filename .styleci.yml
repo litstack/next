@@ -1,2 +1,3 @@
 preset: laravel
 version: 8
+ts: true
