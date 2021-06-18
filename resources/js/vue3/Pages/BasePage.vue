@@ -1,10 +1,10 @@
 <template>
     <div>
         <component
-            :is="component.name"
             v-for="(component, index) in components"
-            :key="index"
             v-bind="component.props"
+            :is="component.name"
+            :key="index"
         />
     </div>
 </template>

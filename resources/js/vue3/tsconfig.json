@@ -9,12 +9,9 @@
         "sourceMap": false,
         "jsx": "preserve",
     },
-    "exclude": ["node_modules"],
+    "exclude": ["node_modules", "webpack.mix.js"],
     "include": [
-        "./**/*.ts", 
-        "./**/*.d.ts", 
-        "./**/*.tsx", 
-        "./**/*.vue", 
-        "./**/*.js"
+        "./app.ts", 
+        "./Page/**/*.vue", 
     ]
 }

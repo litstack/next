@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 const path = require('path');
 
-mix.ts('app.js', 'dist/react').react();
+mix.ts('app.tsx', 'dist/react').react();
 
 mix.webpackConfig({
     resolve: {

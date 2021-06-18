@@ -50,7 +50,9 @@ interface Index<TItem = any> {
 type TuseIndex<TItem = Model> = (props: Litstack.UseIndexProps) => Index<TItem>;
 export const useIndex : TuseIndex;
 
-type TIndexSearch = FunctionalComponent<Litstack.IndexSearchProps>;
+type TIndexSearch = FunctionalComponent<Litstack.IndexSearchProps & {
+    table: Index
+}>;
 export const IndexSearch : TIndexSearch;
 
 type TIndexTable = FunctionalComponent<Litstack.IndexTableProps>;

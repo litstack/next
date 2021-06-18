@@ -10,7 +10,7 @@ function Index(props) {
 
     return (
         <div>
-            <IndexSearch {...props} {...table} />
+            <IndexSearch {...props} table={table} />
         </div>
     );
 }
