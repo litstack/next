@@ -1,5 +1,10 @@
 {
     "scripts": {
-        "install": "npm --prefix resource/js/react install && npm --prefix resource/js/vu3 install"
+        "install": "npm --prefix resources/js/react install && npm --prefix resources/js/vue3 install",
+        "install-packages": "npm --prefix packages/litstack install && npm --prefix packages/litstack-vue3 install && npm --prefix packages/litstack-react install && npm --prefix packages/theme-vue3 install && npm --prefix packages/theme-react install",
+        "watch-react": "npm --prefix resources/js/react run watch",
+        "watch-vue3": "npm --prefix resources/js/vue3 run watch",
+        "production": "npm --prefix resources/js/react run production && npm --prefix resources/js/vue3 run production",
+        "prod": "npm run production"
     }
 }
