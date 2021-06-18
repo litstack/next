@@ -2,7 +2,7 @@ import { useForm } from '@inertiajs/inertia-react';
 import { Component } from '../components';
 import pickBy from 'lodash.pickby';
 
-const Form = ({ model, attributes, route, schema }) => {
+export const Form = ({ model, attributes, route, schema }) => {
     const form = useForm(
         pickBy(model, (value, key) => attributes.includes(key))
     );
