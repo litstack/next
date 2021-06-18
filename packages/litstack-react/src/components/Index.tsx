@@ -4,12 +4,16 @@ import debounce from 'lodash.debounce';
 import { TIndexTable, TIndexSearch, TIndexPagination, TuseIndex } from '../..';
 import { Model } from '@litstackjs/litstack';
 
-export const IndexSearch : TIndexSearch = function({ searchComponent, ...props }) {
+export const IndexSearch : TIndexSearch = function({ searchComponent, hasSearch, table }) {
+    if(! hasSearch) {
+        return;
+    }
+    
     return (
         <Component
             name={searchComponent.name}
             props={searchComponent.props}
-            {...props}
+            table={table}
         />
     );
 }

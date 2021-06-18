@@ -83,9 +83,11 @@ abstract class Table
      */
     public function items(Request $request, Builder $builder, $resource = JsonResource::class)
     {
-        $items = $builder
-            ->take($this->defaultPerPage)
-            ->paginate();
+        if ($this->hasSearch()) {
+            call_user_func_array([$this, 'search'], [$builder, $request->search]);
+        }
+
+        $items = $builder->paginate($this->defaultPerPage);
 
         return $resource::collection($items);
     }
@@ -103,6 +105,7 @@ abstract class Table
             'paginationComponent' => $this->getPaginationComponent()->toArray(),
             'syncUrl'             => $this->syncUrl,
             'defaultPerPage'      => $this->defaultPerPage,
+            'hasSearch'           => $this->hasSearch(),
         ]);
     }
 
@@ -128,6 +131,16 @@ abstract class Table
         return component($this->searchComponentName, [
 
         ]);
+    }
+
+    /**
+     * Determine wether the table is a searchable.
+     *
+     * @return boolean
+     */
+    public function hasSearch()
+    {
+        return method_exists($this, 'search');
     }
 
     /**

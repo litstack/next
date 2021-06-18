@@ -27,7 +27,8 @@ export declare interface UseIndexProps {
 type UseIndexAttrs = Record<keyof UseIndexProps, any>;
 
 export declare type IndexSearchProps = {
-    searchComponent: Component
+    searchComponent: Component,
+    hasSearch: boolean
 }
 
 export declare interface IndexTableProps {
