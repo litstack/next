@@ -2,11 +2,12 @@
 
 namespace Ignite\Ui;
 
+use Inertia\Inertia;
+use Inertia\Response;
+use Ignite\Ui\Table\Table;
 use Ignite\Contracts\Form\Form;
 use Ignite\Contracts\Ui\Page as PageContract;
 use Illuminate\Contracts\Support\Responsable;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class Page implements PageContract, Responsable
 {
@@ -89,7 +90,14 @@ class Page implements PageContract, Responsable
         return $this;
     }
 
-    public function table($table, $route)
+    /**
+     * Add table to page.
+     *
+     * @param Table $table
+     * @param string $route
+     * @return $this
+     */
+    public function table(Table $table, $route)
     {
         $this->components[] = $table->render($route);
 

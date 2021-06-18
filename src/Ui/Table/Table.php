@@ -2,8 +2,11 @@
 
 namespace Ignite\Ui\Table;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 abstract class Table
 {
@@ -14,10 +17,25 @@ abstract class Table
      */
     protected $schema;
 
+    /**
+     * Default number of items per page.
+     *
+     * @var integer
+     */
     protected $defaultPerPage = 10;
 
+    /**
+     * The table.
+     *
+     * @var array
+     */
     protected $filters = [];
 
+    /**
+     * Indicates wether the url should be synchronised.
+     *
+     * @var boolean
+     */
     protected $syncUrl = false;
 
     /**
@@ -56,7 +74,15 @@ abstract class Table
      */
     abstract public function schema(Schema $form);
 
-    public function items(Request $request, Builder $builder, $resource)
+    /**
+     * Get index table items.
+     *
+     * @param  Request $request
+     * @param  Builder $builder
+     * @param  string $resource
+     * @return ResourceCollection
+     */
+    public function items(Request $request, Builder $builder, $resource = JsonResource::class)
     {
         $items = $builder
             ->take($this->defaultPerPage)
@@ -81,6 +107,11 @@ abstract class Table
         ]);
     }
 
+    /**
+     * Get table component.
+     *
+     * @return \Ignite\Contracts\Ui\Component
+     */
     public function getTableComponent()
     {
         return component($this->tableComponentName, [
@@ -88,6 +119,11 @@ abstract class Table
         ]);
     }
 
+    /**
+     * Get search component.
+     *
+     * @return \Ignite\Contracts\Ui\Component
+     */
     public function getSearchComponent()
     {
         return component($this->searchComponentName, [
@@ -95,6 +131,11 @@ abstract class Table
         ]);
     }
 
+    /**
+     * Get pagination component.
+     *
+     * @return \Ignite\Contracts\Ui\Component
+     */
     public function getPaginationComponent()
     {
         return component($this->paginationComponentName, [
@@ -102,6 +143,12 @@ abstract class Table
         ]);
     }
 
+    /**
+     * Set the route where the items should be loaded from.
+     *
+     * @param  string $route
+     * @return $this
+     */
     public function from($route)
     {
         $this->component->prop('route', $route);
@@ -125,6 +172,11 @@ abstract class Table
         return $this;
     }
 
+    /**
+     * Get table schema.
+     *
+     * @return Schema
+     */
     public function getSchema()
     {
         if ($this->schema) {
@@ -138,6 +190,11 @@ abstract class Table
         return $this->schema;
     }
 
+    /**
+     * Get filters.
+     *
+     * @return array
+     */
     public function getFilters()
     {
         return $this->filters;

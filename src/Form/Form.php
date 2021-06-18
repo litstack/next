@@ -112,7 +112,7 @@ abstract class Form implements FormContract
      */
     public function getComponent()
     {
-        $this->getSchema()->applyTo(
+        $this->getSchema()->bindTo(
             $component = component($this->componentName)
         );
 
