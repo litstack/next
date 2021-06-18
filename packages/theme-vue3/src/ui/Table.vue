@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, trKey) in items" :key="`th-${trKey}`">
+            <tr v-for="(item, trKey) in table.items" :key="`th-${trKey}`">
                 <base-td
                     v-for="(column, tdKey) in schema"
                     :key="`td-${tdKey}`"
@@ -24,13 +24,18 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { Th, Td, Index } from '@litstackjs/litstack-vue3';
+import { Th as BaseTh, Td as BaseTd, Index } from '@litstackjs/litstack-vue3';
+import { Component } from '@litstackjs/litstack';
 
 export default defineComponent({
-    components: { Th, Td },
+    components: { BaseTh, BaseTd },
     props: {
         table: {
             type: Object as PropType<Index>,
+            required: true,
+        },
+        schema: {
+            type: Array as PropType<Component[]>,
             required: true,
         },
     },

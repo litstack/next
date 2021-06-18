@@ -2,10 +2,12 @@ import { resolveComponent, ref, h, reactive } from "vue";
 import { TIndexSearch, TIndexTable, TIndexPagination, TuseIndex } from "../.."; 
 const debounce = require('lodash.debounce');
 
-export const IndexSearch : TIndexSearch = function({ searchComponent }, { attrs }) {
+export const IndexSearch : TIndexSearch = function({ searchComponent, table }, { attrs }) {
     return h(resolveComponent(searchComponent.name), {
         ...attrs,
         ...searchComponent.props,
+        modelValue: table.search,
+        'onUpdate:modelValue': table.updateSearch
     });
 }
 
