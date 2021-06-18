@@ -7,9 +7,14 @@ type Model = Record<string, any>;
 
 export const plugin: Plugin;
 
-type TLitstackForm<TItem = Model> = InertiaForm<TItem> & {
-    submit(e: Event | any): void
-}
+type TLitstackForm<TItem = Model> =  {
+    submit(e?: Event | any): void,
+    get: undefined,
+    post: undefined,
+    put: undefined,
+    patch: undefined,
+    delete: undefined,
+} & InertiaForm<TItem>
 
 type TuseForm<TItem = Model> = (props: Litstack.UseFormProps) => TLitstackForm<TItem>;
 export const useForm : TuseForm;

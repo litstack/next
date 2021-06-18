@@ -35,7 +35,12 @@ const useForm : TuseForm = function({ model, attributes, route, store }) {
                 e.preventDefault();
             }
             form.put(route);
-        }
+        },
+        get: undefined,
+        post: undefined,
+        put: undefined,
+        patch: undefined,
+        delete: undefined,
     });
 
     return form;
