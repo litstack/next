@@ -36,14 +36,14 @@ const Table = defineComponent({
         let page = 1;
 
         function loadItems() {
-            busy.value = true;
+            this.busy = true;
             fetch(props.route)
                 .then(response => response.json())
                 .then(json => {
-                    items.value = json.data;
+                    this.items = json.data;
                     this.busy = false;
                 })
-                .catch(() => busy.value = false);
+                .catch(() => this.busy = false);
         }
         
         function reload() {

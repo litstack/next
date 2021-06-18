@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, trKey) in items.value" :key="`th-${trKey}`">
+            <tr v-for="(item, trKey) in items" :key="`th-${trKey}`">
                 <base-td
                     v-for="(column, tdKey) in schema"
                     :key="`td-${tdKey}`"
